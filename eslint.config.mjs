@@ -15,7 +15,7 @@ export default antfu({
   typescript: true,
 
   // Disable jsonc and yaml support
-  jsonc: false,
+  jsonc: true,
   yaml: false,
 
   // `.eslintignore` is no longer supported in Flat config, use `ignores` instead
