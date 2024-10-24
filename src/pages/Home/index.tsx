@@ -4,8 +4,15 @@ import { Button } from '~/components/ui/button'
 function Home() {
   return (
     <div>
-      <NavLink to="/about" className="mr-2">about</NavLink>
-      <Button variant="outline">Button</Button>
+      <NavLink
+        to="/about"
+        className="mr-2"
+      >
+        about
+      </NavLink>
+      <Button variant="outline">
+        Button
+      </Button>
     </div>
   )
 }
