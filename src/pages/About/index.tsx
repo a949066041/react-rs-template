@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { useCountStore } from '../../store'
+import { useCountStore } from '~/store'
 
 function About() {
   const { count, increment, decrement } = useCountStore()
