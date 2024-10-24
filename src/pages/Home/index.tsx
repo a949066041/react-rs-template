@@ -1,10 +1,11 @@
 import { NavLink } from 'react-router-dom'
+import { Button } from '~/components/ui/button'
 
 function Home() {
   return (
     <div>
       <NavLink to="/about" className="mr-2">about</NavLink>
-      this is Home page
+      <Button variant="outline">Button</Button>
     </div>
   )
 }

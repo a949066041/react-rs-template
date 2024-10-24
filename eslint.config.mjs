@@ -22,4 +22,8 @@ export default antfu({
     '**/fixtures',
     // ...globs
   ],
+}, {
+  rules: {
+    'react-refresh/only-export-components': 'off',
+  },
 })
