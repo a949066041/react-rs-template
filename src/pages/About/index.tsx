@@ -1,11 +1,12 @@
-import { useCountStore } from './store'
-import './App.css'
+import { NavLink } from 'react-router-dom'
+import { useCountStore } from '../../store'
 
-function App() {
+function About() {
   const { count, increment, decrement } = useCountStore()
 
   return (
     <div className="h-100vh w-full flex items-center justify-center">
+      <NavLink to="/">home</NavLink>
       <div className="flex items-center">
         <span className="mr-2 text-3xl text-red-5">
           hello template
@@ -19,4 +20,4 @@ function App() {
   )
 }
 
-export default App
+export default About
