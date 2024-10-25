@@ -8,4 +8,7 @@ export default defineConfig({
       '~': './src',
     },
   },
+  html: {
+    title: 'template rs ',
+  },
 })
