@@ -9,6 +9,7 @@ function Home() {
       )
       return await response.json()
     },
+    staleTime: 50 * 60 * 1000,
   })
   if (isPending)
     return 'Loading...'

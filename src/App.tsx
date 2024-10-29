@@ -9,12 +9,14 @@ const queryClient = new QueryClient()
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Link to="/">
-        <Button variant="link">Home</Button>
-      </Link>
-      <Link to="/about">
-        <Button variant="link">about</Button>
-      </Link>
+      <Button variant="link" asChild>
+        <Link to="/">react query</Link>
+      </Button>
+      <Button asChild variant="link">
+        <Link to="/about">
+          zus state
+        </Link>
+      </Button>
       <Outlet />
       <TanStackRouterDevtools router={router} />
       <ReactQueryDevtools />
