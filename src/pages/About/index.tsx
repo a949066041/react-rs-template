@@ -1,4 +1,3 @@
-import { Button } from '~/components/ui/button.tsx'
 import { useCountStore } from '~/store'
 
 function About() {
@@ -9,10 +8,10 @@ function About() {
       <span className="mr-2 text-3xl text-red-300">
         this is count
         {count}
-        <div className="icon-[tabler--alarm-average] h-1em w-1em"></div>
+        <div className="icon-[unjs--nitro] h-1em w-1em"></div>
       </span>
-      <Button onClick={() => increment(1)} className=" mx-2" type="button">click add</Button>
-      <Button onClick={() => decrement(1)} type="button">click sub</Button>
+      <button onClick={() => increment(1)} className=" mx-2" type="button">click add</button>
+      <button onClick={() => decrement(1)} type="button">click sub</button>
     </div>
   )
 }
