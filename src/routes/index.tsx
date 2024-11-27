@@ -1,6 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
+import { createFileRoute } from '@tanstack/react-router'
+import * as React from 'react'
 
-function Home() {
+export const Route = createFileRoute('/')({
+  component: RouteComponent,
+})
+
+function RouteComponent() {
   const { isPending, error, data, isFetching } = useQuery({
     queryKey: ['repoData'],
     queryFn: async () => {
@@ -39,5 +45,3 @@ function Home() {
     </div>
   )
 }
-
-export default Home

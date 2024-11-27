@@ -1,6 +1,12 @@
+import { createLazyFileRoute } from '@tanstack/react-router'
+import * as React from 'react'
 import { useCountStore } from '~/store'
 
-function About() {
+export const Route = createLazyFileRoute('/about')({
+  component: RouteComponent,
+})
+
+function RouteComponent() {
   const { count, increment, decrement } = useCountStore()
 
   return (
@@ -15,5 +21,3 @@ function About() {
     </div>
   )
 }
-
-export default About
