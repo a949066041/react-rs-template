@@ -2,6 +2,7 @@
   "name": "rsbuild-react-tempalte",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "pnpm@9.15.0",
   "scripts": {
     "dev": "rsbuild dev",
     "build": "rsbuild build",
@@ -12,7 +13,7 @@
   "dependencies": {
     "@iconify/tailwind": "^1.2.0",
     "@tanstack/react-query": "^5.62.3",
-    "@tanstack/react-router": "^1.86.1",
+    "@tanstack/react-router": "^1.87.1",
     "@tanstack/router-plugin": "^1.86.0",
     "classix": "^2.2.0",
     "dayjs": "^1.11.13",
@@ -24,13 +25,13 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.11.2",
-    "@eslint-react/eslint-plugin": "^1.17.3",
+    "@eslint-react/eslint-plugin": "^1.18.0",
     "@iconify/json": "^2.2.280",
     "@rsbuild/core": "^1.1.9",
     "@rsbuild/plugin-react": "^1.1.0",
     "@rsdoctor/rspack-plugin": "^0.4.11",
     "@tanstack/react-query-devtools": "^5.62.3",
-    "@tanstack/router-devtools": "^1.86.1",
+    "@tanstack/router-devtools": "^1.87.1",
     "@types/lodash-es": "^4.17.12",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.1",
@@ -38,9 +39,8 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "eslint-plugin-unused-imports": "^4.1.4",
-    "tailwindcss": "3.4.15",
+    "tailwindcss": "^3.4.16",
     "taze": "^0.18.0",
-    "typescript": "^5.8.0-dev.20241207"
-  },
-  "packageManager": "pnpm@9.15.0"
+    "typescript": "^5.8.0"
+  }
 }
