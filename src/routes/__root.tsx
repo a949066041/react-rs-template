@@ -2,6 +2,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import classix from 'classix'
+import { useDarkMode } from 'usehooks-ts'
 
 const routes = [
   { path: '/', title: '首页', icon: 'icon-[line-md--home]' },
@@ -11,10 +12,25 @@ const routes = [
   { path: '/about', title: '关于', icon: 'icon-[ix--about]' },
 ]
 
+function ThemeMode() {
+  const { isDarkMode, toggle, enable, disable } = useDarkMode()
+  return (
+    <>
+      <p>
+        Current theme:
+        {isDarkMode ? 'dark' : 'light'}
+      </p>
+      <button onClick={toggle} type="button">Toggle</button>
+      <button onClick={enable} type="button">Enable</button>
+      <button onClick={disable} type="button">Disable</button>
+    </>
+  )
+}
+
 export const Route = createRootRoute({
   component: () => (
-    <div className=" grid grid-flow-row-dense grid-cols-3">
-      <ul className="col-span-1">
+    <div className=" flex h-screen">
+      <ul className=" w-[200px] border-r-2 border-dashed border-blue-300 h-full">
         {
           routes.map(item => (
             <li key={item.path} className=" h-10  leading-10 p-2 ">
@@ -26,7 +42,12 @@ export const Route = createRootRoute({
           ))
         }
       </ul>
-      <div className=" col-span-2">
+      <div className="  flex-1 py-2 px-3">
+        <header className=" text-right">
+          <span className=" justify-end">
+            <ThemeMode />
+          </span>
+        </header>
         <Outlet />
       </div>
       <TanStackRouterDevtools />

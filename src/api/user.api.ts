@@ -1,16 +1,17 @@
 import type { IUserEntity, IUserList } from './user.type'
 import { queryOptions } from '@tanstack/react-query'
 
+const baseUrl = 'https://dummyjson.com/users'
 /**
  * api
  */
 export async function fetchUserList(): Promise<IUserList> {
-  const res = await fetch('https://dummyjson.com/users/?limit=3')
+  const res = await fetch(`${baseUrl}?limit=3`)
   return res.json()
 }
 
 export async function fetchUser(id: IUserEntity['id']): Promise<IUserEntity> {
-  const res = await fetch(`https://dummyjson.com/users/${id}`)
+  const res = await fetch(`${baseUrl}/${id}`)
   return res.json()
 }
 
