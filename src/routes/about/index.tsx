@@ -1,0 +1,14 @@
+import { createFileRoute, Link } from '@tanstack/react-router'
+
+export const Route = createFileRoute('/about/')({
+  component: RouteComponent,
+})
+
+function RouteComponent() {
+  return (
+    <div>
+      Hello "/about/"!
+      <Link to="/about/1">link to about detail</Link>
+    </div>
+  )
+}

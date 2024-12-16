@@ -13,24 +13,72 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as PostsImport } from './routes/posts'
+import { Route as LayoutImport } from './routes/_layout'
 import { Route as IndexImport } from './routes/index'
+import { Route as PostsIndexImport } from './routes/posts.index'
+import { Route as AboutIndexImport } from './routes/about/index'
+import { Route as PostsIdImport } from './routes/posts.$id'
+import { Route as AboutIdImport } from './routes/about/$id'
+import { Route as LayoutLayoutTestImport } from './routes/_layout/layout-test'
 
 // Create Virtual Routes
 
-const AboutLazyImport = createFileRoute('/about')()
+const StoreLazyImport = createFileRoute('/store')()
 
 // Create/Update Routes
 
-const AboutLazyRoute = AboutLazyImport.update({
-  id: '/about',
-  path: '/about',
+const StoreLazyRoute = StoreLazyImport.update({
+  id: '/store',
+  path: '/store',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/store.lazy').then((d) => d.Route))
+
+const PostsRoute = PostsImport.update({
+  id: '/posts',
+  path: '/posts',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LayoutRoute = LayoutImport.update({
+  id: '/_layout',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const PostsIndexRoute = PostsIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PostsRoute,
+} as any)
+
+const AboutIndexRoute = AboutIndexImport.update({
+  id: '/about/',
+  path: '/about/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PostsIdRoute = PostsIdImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => PostsRoute,
+} as any)
+
+const AboutIdRoute = AboutIdImport.update({
+  id: '/about/$id',
+  path: '/about/$id',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LayoutLayoutTestRoute = LayoutLayoutTestImport.update({
+  id: '/layout-test',
+  path: '/layout-test',
+  getParentRoute: () => LayoutRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -44,51 +92,178 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/about': {
-      id: '/about'
+    '/_layout': {
+      id: '/_layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof LayoutImport
+      parentRoute: typeof rootRoute
+    }
+    '/posts': {
+      id: '/posts'
+      path: '/posts'
+      fullPath: '/posts'
+      preLoaderRoute: typeof PostsImport
+      parentRoute: typeof rootRoute
+    }
+    '/store': {
+      id: '/store'
+      path: '/store'
+      fullPath: '/store'
+      preLoaderRoute: typeof StoreLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/_layout/layout-test': {
+      id: '/_layout/layout-test'
+      path: '/layout-test'
+      fullPath: '/layout-test'
+      preLoaderRoute: typeof LayoutLayoutTestImport
+      parentRoute: typeof LayoutImport
+    }
+    '/about/$id': {
+      id: '/about/$id'
+      path: '/about/$id'
+      fullPath: '/about/$id'
+      preLoaderRoute: typeof AboutIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/posts/$id': {
+      id: '/posts/$id'
+      path: '/$id'
+      fullPath: '/posts/$id'
+      preLoaderRoute: typeof PostsIdImport
+      parentRoute: typeof PostsImport
+    }
+    '/about/': {
+      id: '/about/'
       path: '/about'
       fullPath: '/about'
-      preLoaderRoute: typeof AboutLazyImport
+      preLoaderRoute: typeof AboutIndexImport
       parentRoute: typeof rootRoute
+    }
+    '/posts/': {
+      id: '/posts/'
+      path: '/'
+      fullPath: '/posts/'
+      preLoaderRoute: typeof PostsIndexImport
+      parentRoute: typeof PostsImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface LayoutRouteChildren {
+  LayoutLayoutTestRoute: typeof LayoutLayoutTestRoute
+}
+
+const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutLayoutTestRoute: LayoutLayoutTestRoute,
+}
+
+const LayoutRouteWithChildren =
+  LayoutRoute._addFileChildren(LayoutRouteChildren)
+
+interface PostsRouteChildren {
+  PostsIdRoute: typeof PostsIdRoute
+  PostsIndexRoute: typeof PostsIndexRoute
+}
+
+const PostsRouteChildren: PostsRouteChildren = {
+  PostsIdRoute: PostsIdRoute,
+  PostsIndexRoute: PostsIndexRoute,
+}
+
+const PostsRouteWithChildren = PostsRoute._addFileChildren(PostsRouteChildren)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutLazyRoute
+  '': typeof LayoutRouteWithChildren
+  '/posts': typeof PostsRouteWithChildren
+  '/store': typeof StoreLazyRoute
+  '/layout-test': typeof LayoutLayoutTestRoute
+  '/about/$id': typeof AboutIdRoute
+  '/posts/$id': typeof PostsIdRoute
+  '/about': typeof AboutIndexRoute
+  '/posts/': typeof PostsIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutLazyRoute
+  '': typeof LayoutRouteWithChildren
+  '/store': typeof StoreLazyRoute
+  '/layout-test': typeof LayoutLayoutTestRoute
+  '/about/$id': typeof AboutIdRoute
+  '/posts/$id': typeof PostsIdRoute
+  '/about': typeof AboutIndexRoute
+  '/posts': typeof PostsIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/about': typeof AboutLazyRoute
+  '/_layout': typeof LayoutRouteWithChildren
+  '/posts': typeof PostsRouteWithChildren
+  '/store': typeof StoreLazyRoute
+  '/_layout/layout-test': typeof LayoutLayoutTestRoute
+  '/about/$id': typeof AboutIdRoute
+  '/posts/$id': typeof PostsIdRoute
+  '/about/': typeof AboutIndexRoute
+  '/posts/': typeof PostsIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths:
+    | '/'
+    | ''
+    | '/posts'
+    | '/store'
+    | '/layout-test'
+    | '/about/$id'
+    | '/posts/$id'
+    | '/about'
+    | '/posts/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to:
+    | '/'
+    | ''
+    | '/store'
+    | '/layout-test'
+    | '/about/$id'
+    | '/posts/$id'
+    | '/about'
+    | '/posts'
+  id:
+    | '__root__'
+    | '/'
+    | '/_layout'
+    | '/posts'
+    | '/store'
+    | '/_layout/layout-test'
+    | '/about/$id'
+    | '/posts/$id'
+    | '/about/'
+    | '/posts/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutLazyRoute: typeof AboutLazyRoute
+  LayoutRoute: typeof LayoutRouteWithChildren
+  PostsRoute: typeof PostsRouteWithChildren
+  StoreLazyRoute: typeof StoreLazyRoute
+  AboutIdRoute: typeof AboutIdRoute
+  AboutIndexRoute: typeof AboutIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutLazyRoute: AboutLazyRoute,
+  LayoutRoute: LayoutRouteWithChildren,
+  PostsRoute: PostsRouteWithChildren,
+  StoreLazyRoute: StoreLazyRoute,
+  AboutIdRoute: AboutIdRoute,
+  AboutIndexRoute: AboutIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -102,14 +277,49 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about"
+        "/_layout",
+        "/posts",
+        "/store",
+        "/about/$id",
+        "/about/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/about": {
-      "filePath": "about.lazy.tsx"
+    "/_layout": {
+      "filePath": "_layout.tsx",
+      "children": [
+        "/_layout/layout-test"
+      ]
+    },
+    "/posts": {
+      "filePath": "posts.tsx",
+      "children": [
+        "/posts/$id",
+        "/posts/"
+      ]
+    },
+    "/store": {
+      "filePath": "store.lazy.tsx"
+    },
+    "/_layout/layout-test": {
+      "filePath": "_layout/layout-test.tsx",
+      "parent": "/_layout"
+    },
+    "/about/$id": {
+      "filePath": "about/$id.tsx"
+    },
+    "/posts/$id": {
+      "filePath": "posts.$id.tsx",
+      "parent": "/posts"
+    },
+    "/about/": {
+      "filePath": "about/index.tsx"
+    },
+    "/posts/": {
+      "filePath": "posts.index.tsx",
+      "parent": "/posts"
     }
   }
 }
