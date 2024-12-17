@@ -9,6 +9,7 @@ const routes = [
   { path: '/store', title: 'zustand 缓存', icon: 'icon-[octicon--cache-24]' },
   { path: '/posts', title: 'react query', icon: 'icon-[logos--react-query]' },
   { path: '/layout-test', title: '嵌套路由', icon: 'icon-[ant-design--layout-outlined]' },
+  { path: '/group2', title: '分组', icon: 'icon-[icons8--group]' },
   { path: '/about', title: '关于', icon: 'icon-[ix--about]' },
 ]
 

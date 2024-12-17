@@ -14,13 +14,23 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as PostsImport } from './routes/posts'
-import { Route as LayoutImport } from './routes/_layout'
+import { Route as NestingImport } from './routes/_nesting'
 import { Route as IndexImport } from './routes/index'
 import { Route as PostsIndexImport } from './routes/posts.index'
 import { Route as AboutIndexImport } from './routes/about/index'
 import { Route as PostsIdImport } from './routes/posts.$id'
 import { Route as AboutIdImport } from './routes/about/$id'
-import { Route as LayoutLayoutTestImport } from './routes/_layout/layout-test'
+import { Route as NestingLayoutTestImport } from './routes/_nesting/layout-test'
+import { Route as NestingLayoutImport } from './routes/_nesting/_layout'
+import { Route as NestingTestImport } from './routes/_nesting/$test'
+import { Route as groupGroup3Import } from './routes/(group)/group3'
+import { Route as groupGroup2Import } from './routes/(group)/group2'
+import { Route as AboutNameIndexImport } from './routes/about/name/index'
+import { Route as AboutValueIndexImport } from './routes/about/$value/index'
+import { Route as AboutNameNameImport } from './routes/about/name/$name'
+import { Route as AboutValueCreateImport } from './routes/about/$value/create'
+import { Route as NestingLayoutTest2Import } from './routes/_nesting/_layout/test2'
+import { Route as NestingLayoutTest3IdImport } from './routes/_nesting/_layout/test3.$id'
 
 // Create Virtual Routes
 
@@ -40,8 +50,8 @@ const PostsRoute = PostsImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const LayoutRoute = LayoutImport.update({
-  id: '/_layout',
+const NestingRoute = NestingImport.update({
+  id: '/_nesting',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -75,10 +85,69 @@ const AboutIdRoute = AboutIdImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const LayoutLayoutTestRoute = LayoutLayoutTestImport.update({
+const NestingLayoutTestRoute = NestingLayoutTestImport.update({
   id: '/layout-test',
   path: '/layout-test',
-  getParentRoute: () => LayoutRoute,
+  getParentRoute: () => NestingRoute,
+} as any)
+
+const NestingLayoutRoute = NestingLayoutImport.update({
+  id: '/_layout',
+  getParentRoute: () => NestingRoute,
+} as any)
+
+const NestingTestRoute = NestingTestImport.update({
+  id: '/$test',
+  path: '/$test',
+  getParentRoute: () => NestingRoute,
+} as any)
+
+const groupGroup3Route = groupGroup3Import.update({
+  id: '/(group)/group3',
+  path: '/group3',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const groupGroup2Route = groupGroup2Import.update({
+  id: '/(group)/group2',
+  path: '/group2',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AboutNameIndexRoute = AboutNameIndexImport.update({
+  id: '/about/name/',
+  path: '/about/name/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AboutValueIndexRoute = AboutValueIndexImport.update({
+  id: '/about/$value/',
+  path: '/about/$value/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AboutNameNameRoute = AboutNameNameImport.update({
+  id: '/about/name/$name',
+  path: '/about/name/$name',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AboutValueCreateRoute = AboutValueCreateImport.update({
+  id: '/about/$value/create',
+  path: '/about/$value/create',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const NestingLayoutTest2Route = NestingLayoutTest2Import.update({
+  id: '/test2',
+  path: '/test2',
+  getParentRoute: () => NestingLayoutRoute,
+} as any)
+
+const NestingLayoutTest3IdRoute = NestingLayoutTest3IdImport.update({
+  id: '/test3/$id',
+  path: '/test3/$id',
+  getParentRoute: () => NestingLayoutRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -92,11 +161,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/_layout': {
-      id: '/_layout'
+    '/_nesting': {
+      id: '/_nesting'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof LayoutImport
+      preLoaderRoute: typeof NestingImport
       parentRoute: typeof rootRoute
     }
     '/posts': {
@@ -113,12 +182,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StoreLazyImport
       parentRoute: typeof rootRoute
     }
-    '/_layout/layout-test': {
-      id: '/_layout/layout-test'
+    '/(group)/group2': {
+      id: '/(group)/group2'
+      path: '/group2'
+      fullPath: '/group2'
+      preLoaderRoute: typeof groupGroup2Import
+      parentRoute: typeof rootRoute
+    }
+    '/(group)/group3': {
+      id: '/(group)/group3'
+      path: '/group3'
+      fullPath: '/group3'
+      preLoaderRoute: typeof groupGroup3Import
+      parentRoute: typeof rootRoute
+    }
+    '/_nesting/$test': {
+      id: '/_nesting/$test'
+      path: '/$test'
+      fullPath: '/$test'
+      preLoaderRoute: typeof NestingTestImport
+      parentRoute: typeof NestingImport
+    }
+    '/_nesting/_layout': {
+      id: '/_nesting/_layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof NestingLayoutImport
+      parentRoute: typeof NestingImport
+    }
+    '/_nesting/layout-test': {
+      id: '/_nesting/layout-test'
       path: '/layout-test'
       fullPath: '/layout-test'
-      preLoaderRoute: typeof LayoutLayoutTestImport
-      parentRoute: typeof LayoutImport
+      preLoaderRoute: typeof NestingLayoutTestImport
+      parentRoute: typeof NestingImport
     }
     '/about/$id': {
       id: '/about/$id'
@@ -148,21 +245,81 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PostsIndexImport
       parentRoute: typeof PostsImport
     }
+    '/_nesting/_layout/test2': {
+      id: '/_nesting/_layout/test2'
+      path: '/test2'
+      fullPath: '/test2'
+      preLoaderRoute: typeof NestingLayoutTest2Import
+      parentRoute: typeof NestingLayoutImport
+    }
+    '/about/$value/create': {
+      id: '/about/$value/create'
+      path: '/about/$value/create'
+      fullPath: '/about/$value/create'
+      preLoaderRoute: typeof AboutValueCreateImport
+      parentRoute: typeof rootRoute
+    }
+    '/about/name/$name': {
+      id: '/about/name/$name'
+      path: '/about/name/$name'
+      fullPath: '/about/name/$name'
+      preLoaderRoute: typeof AboutNameNameImport
+      parentRoute: typeof rootRoute
+    }
+    '/about/$value/': {
+      id: '/about/$value/'
+      path: '/about/$value'
+      fullPath: '/about/$value'
+      preLoaderRoute: typeof AboutValueIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/about/name/': {
+      id: '/about/name/'
+      path: '/about/name'
+      fullPath: '/about/name'
+      preLoaderRoute: typeof AboutNameIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/_nesting/_layout/test3/$id': {
+      id: '/_nesting/_layout/test3/$id'
+      path: '/test3/$id'
+      fullPath: '/test3/$id'
+      preLoaderRoute: typeof NestingLayoutTest3IdImport
+      parentRoute: typeof NestingLayoutImport
+    }
   }
 }
 
 // Create and export the route tree
 
-interface LayoutRouteChildren {
-  LayoutLayoutTestRoute: typeof LayoutLayoutTestRoute
+interface NestingLayoutRouteChildren {
+  NestingLayoutTest2Route: typeof NestingLayoutTest2Route
+  NestingLayoutTest3IdRoute: typeof NestingLayoutTest3IdRoute
 }
 
-const LayoutRouteChildren: LayoutRouteChildren = {
-  LayoutLayoutTestRoute: LayoutLayoutTestRoute,
+const NestingLayoutRouteChildren: NestingLayoutRouteChildren = {
+  NestingLayoutTest2Route: NestingLayoutTest2Route,
+  NestingLayoutTest3IdRoute: NestingLayoutTest3IdRoute,
 }
 
-const LayoutRouteWithChildren =
-  LayoutRoute._addFileChildren(LayoutRouteChildren)
+const NestingLayoutRouteWithChildren = NestingLayoutRoute._addFileChildren(
+  NestingLayoutRouteChildren,
+)
+
+interface NestingRouteChildren {
+  NestingTestRoute: typeof NestingTestRoute
+  NestingLayoutRoute: typeof NestingLayoutRouteWithChildren
+  NestingLayoutTestRoute: typeof NestingLayoutTestRoute
+}
+
+const NestingRouteChildren: NestingRouteChildren = {
+  NestingTestRoute: NestingTestRoute,
+  NestingLayoutRoute: NestingLayoutRouteWithChildren,
+  NestingLayoutTestRoute: NestingLayoutTestRoute,
+}
+
+const NestingRouteWithChildren =
+  NestingRoute._addFileChildren(NestingRouteChildren)
 
 interface PostsRouteChildren {
   PostsIdRoute: typeof PostsIdRoute
@@ -178,38 +335,66 @@ const PostsRouteWithChildren = PostsRoute._addFileChildren(PostsRouteChildren)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '': typeof LayoutRouteWithChildren
+  '': typeof NestingLayoutRouteWithChildren
   '/posts': typeof PostsRouteWithChildren
   '/store': typeof StoreLazyRoute
-  '/layout-test': typeof LayoutLayoutTestRoute
+  '/group2': typeof groupGroup2Route
+  '/group3': typeof groupGroup3Route
+  '/$test': typeof NestingTestRoute
+  '/layout-test': typeof NestingLayoutTestRoute
   '/about/$id': typeof AboutIdRoute
   '/posts/$id': typeof PostsIdRoute
   '/about': typeof AboutIndexRoute
   '/posts/': typeof PostsIndexRoute
+  '/test2': typeof NestingLayoutTest2Route
+  '/about/$value/create': typeof AboutValueCreateRoute
+  '/about/name/$name': typeof AboutNameNameRoute
+  '/about/$value': typeof AboutValueIndexRoute
+  '/about/name': typeof AboutNameIndexRoute
+  '/test3/$id': typeof NestingLayoutTest3IdRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '': typeof LayoutRouteWithChildren
+  '': typeof NestingLayoutRouteWithChildren
   '/store': typeof StoreLazyRoute
-  '/layout-test': typeof LayoutLayoutTestRoute
+  '/group2': typeof groupGroup2Route
+  '/group3': typeof groupGroup3Route
+  '/$test': typeof NestingTestRoute
+  '/layout-test': typeof NestingLayoutTestRoute
   '/about/$id': typeof AboutIdRoute
   '/posts/$id': typeof PostsIdRoute
   '/about': typeof AboutIndexRoute
   '/posts': typeof PostsIndexRoute
+  '/test2': typeof NestingLayoutTest2Route
+  '/about/$value/create': typeof AboutValueCreateRoute
+  '/about/name/$name': typeof AboutNameNameRoute
+  '/about/$value': typeof AboutValueIndexRoute
+  '/about/name': typeof AboutNameIndexRoute
+  '/test3/$id': typeof NestingLayoutTest3IdRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/_layout': typeof LayoutRouteWithChildren
+  '/_nesting': typeof NestingRouteWithChildren
   '/posts': typeof PostsRouteWithChildren
   '/store': typeof StoreLazyRoute
-  '/_layout/layout-test': typeof LayoutLayoutTestRoute
+  '/(group)/group2': typeof groupGroup2Route
+  '/(group)/group3': typeof groupGroup3Route
+  '/_nesting/$test': typeof NestingTestRoute
+  '/_nesting/_layout': typeof NestingLayoutRouteWithChildren
+  '/_nesting/layout-test': typeof NestingLayoutTestRoute
   '/about/$id': typeof AboutIdRoute
   '/posts/$id': typeof PostsIdRoute
   '/about/': typeof AboutIndexRoute
   '/posts/': typeof PostsIndexRoute
+  '/_nesting/_layout/test2': typeof NestingLayoutTest2Route
+  '/about/$value/create': typeof AboutValueCreateRoute
+  '/about/name/$name': typeof AboutNameNameRoute
+  '/about/$value/': typeof AboutValueIndexRoute
+  '/about/name/': typeof AboutNameIndexRoute
+  '/_nesting/_layout/test3/$id': typeof NestingLayoutTest3IdRoute
 }
 
 export interface FileRouteTypes {
@@ -219,51 +404,91 @@ export interface FileRouteTypes {
     | ''
     | '/posts'
     | '/store'
+    | '/group2'
+    | '/group3'
+    | '/$test'
     | '/layout-test'
     | '/about/$id'
     | '/posts/$id'
     | '/about'
     | '/posts/'
+    | '/test2'
+    | '/about/$value/create'
+    | '/about/name/$name'
+    | '/about/$value'
+    | '/about/name'
+    | '/test3/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | ''
     | '/store'
+    | '/group2'
+    | '/group3'
+    | '/$test'
     | '/layout-test'
     | '/about/$id'
     | '/posts/$id'
     | '/about'
     | '/posts'
+    | '/test2'
+    | '/about/$value/create'
+    | '/about/name/$name'
+    | '/about/$value'
+    | '/about/name'
+    | '/test3/$id'
   id:
     | '__root__'
     | '/'
-    | '/_layout'
+    | '/_nesting'
     | '/posts'
     | '/store'
-    | '/_layout/layout-test'
+    | '/(group)/group2'
+    | '/(group)/group3'
+    | '/_nesting/$test'
+    | '/_nesting/_layout'
+    | '/_nesting/layout-test'
     | '/about/$id'
     | '/posts/$id'
     | '/about/'
     | '/posts/'
+    | '/_nesting/_layout/test2'
+    | '/about/$value/create'
+    | '/about/name/$name'
+    | '/about/$value/'
+    | '/about/name/'
+    | '/_nesting/_layout/test3/$id'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  LayoutRoute: typeof LayoutRouteWithChildren
+  NestingRoute: typeof NestingRouteWithChildren
   PostsRoute: typeof PostsRouteWithChildren
   StoreLazyRoute: typeof StoreLazyRoute
+  groupGroup2Route: typeof groupGroup2Route
+  groupGroup3Route: typeof groupGroup3Route
   AboutIdRoute: typeof AboutIdRoute
   AboutIndexRoute: typeof AboutIndexRoute
+  AboutValueCreateRoute: typeof AboutValueCreateRoute
+  AboutNameNameRoute: typeof AboutNameNameRoute
+  AboutValueIndexRoute: typeof AboutValueIndexRoute
+  AboutNameIndexRoute: typeof AboutNameIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  LayoutRoute: LayoutRouteWithChildren,
+  NestingRoute: NestingRouteWithChildren,
   PostsRoute: PostsRouteWithChildren,
   StoreLazyRoute: StoreLazyRoute,
+  groupGroup2Route: groupGroup2Route,
+  groupGroup3Route: groupGroup3Route,
   AboutIdRoute: AboutIdRoute,
   AboutIndexRoute: AboutIndexRoute,
+  AboutValueCreateRoute: AboutValueCreateRoute,
+  AboutNameNameRoute: AboutNameNameRoute,
+  AboutValueIndexRoute: AboutValueIndexRoute,
+  AboutNameIndexRoute: AboutNameIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -277,20 +502,28 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/_layout",
+        "/_nesting",
         "/posts",
         "/store",
+        "/(group)/group2",
+        "/(group)/group3",
         "/about/$id",
-        "/about/"
+        "/about/",
+        "/about/$value/create",
+        "/about/name/$name",
+        "/about/$value/",
+        "/about/name/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/_layout": {
-      "filePath": "_layout.tsx",
+    "/_nesting": {
+      "filePath": "_nesting.tsx",
       "children": [
-        "/_layout/layout-test"
+        "/_nesting/$test",
+        "/_nesting/_layout",
+        "/_nesting/layout-test"
       ]
     },
     "/posts": {
@@ -303,9 +536,27 @@ export const routeTree = rootRoute
     "/store": {
       "filePath": "store.lazy.tsx"
     },
-    "/_layout/layout-test": {
-      "filePath": "_layout/layout-test.tsx",
-      "parent": "/_layout"
+    "/(group)/group2": {
+      "filePath": "(group)/group2.tsx"
+    },
+    "/(group)/group3": {
+      "filePath": "(group)/group3.tsx"
+    },
+    "/_nesting/$test": {
+      "filePath": "_nesting/$test.tsx",
+      "parent": "/_nesting"
+    },
+    "/_nesting/_layout": {
+      "filePath": "_nesting/_layout.tsx",
+      "parent": "/_nesting",
+      "children": [
+        "/_nesting/_layout/test2",
+        "/_nesting/_layout/test3/$id"
+      ]
+    },
+    "/_nesting/layout-test": {
+      "filePath": "_nesting/layout-test.tsx",
+      "parent": "/_nesting"
     },
     "/about/$id": {
       "filePath": "about/$id.tsx"
@@ -320,6 +571,26 @@ export const routeTree = rootRoute
     "/posts/": {
       "filePath": "posts.index.tsx",
       "parent": "/posts"
+    },
+    "/_nesting/_layout/test2": {
+      "filePath": "_nesting/_layout/test2.tsx",
+      "parent": "/_nesting/_layout"
+    },
+    "/about/$value/create": {
+      "filePath": "about/$value/create.tsx"
+    },
+    "/about/name/$name": {
+      "filePath": "about/name/$name.tsx"
+    },
+    "/about/$value/": {
+      "filePath": "about/$value/index.tsx"
+    },
+    "/about/name/": {
+      "filePath": "about/name/index.tsx"
+    },
+    "/_nesting/_layout/test3/$id": {
+      "filePath": "_nesting/_layout/test3.$id.tsx",
+      "parent": "/_nesting/_layout"
     }
   }
 }
