@@ -2,7 +2,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import classix from 'classix'
-import { useDarkMode } from 'usehooks-ts'
+import { ThemeProvider, Themes, useTheme } from '~/components'
 
 const routes = [
   { path: '/', title: '首页', icon: 'icon-[line-md--home]' },
@@ -14,45 +14,42 @@ const routes = [
 ]
 
 function ThemeMode() {
-  const { isDarkMode, toggle, enable, disable } = useDarkMode()
+  const { themeName, set } = useTheme()
   return (
-    <>
-      <p>
-        Current theme:
-        {isDarkMode ? 'dark' : 'light'}
-      </p>
-      <button onClick={toggle} type="button">Toggle</button>
-      <button onClick={enable} type="button">Enable</button>
-      <button onClick={disable} type="button">Disable</button>
-    </>
+    <i
+      onClick={() => set(themeName !== Themes.DARK)}
+      className=" dark:icon-[circum--light] icon-[circum--dark] border cursor-pointer text-4xl"
+    />
   )
 }
 
 export const Route = createRootRoute({
   component: () => (
-    <div className=" flex h-screen">
-      <ul className=" w-[200px] flex-none border-r-2 border-dashed border-blue-300 h-full">
-        {
-          routes.map(item => (
-            <li key={item.path} className=" h-10  leading-10 p-2 ">
-              <Link to={item.path} className=" flex items-center" activeProps={{ className: ' font-bold text-red-400' }}>
-                <i className={classix(item.icon, ' mr-2')} />
-                { item.title }
-              </Link>
-            </li>
-          ))
-        }
-      </ul>
-      <div className="  flex-1 py-2 px-3">
-        <header className=" text-right">
-          <span className=" justify-end">
-            <ThemeMode />
-          </span>
-        </header>
-        <Outlet />
+    <ThemeProvider>
+      <div className=" flex h-screen dark:bg-black/75 bg-white/85 dark:text-white">
+        <ul className=" w-[200px] flex-none border-r-2 border-dashed border-blue-300 h-full">
+          {
+            routes.map(item => (
+              <li key={item.path} className=" h-10 leading-10 p-2 ">
+                <Link to={item.path} className=" flex items-center" activeProps={{ className: ' font-bold text-red-400' }}>
+                  <i className={classix(item.icon, ' mr-2')} />
+                  { item.title }
+                </Link>
+              </li>
+            ))
+          }
+        </ul>
+        <div className="  flex-1 py-2 px-3">
+          <header className=" text-right">
+            <span className=" justify-end">
+              <ThemeMode />
+            </span>
+          </header>
+          <Outlet />
+        </div>
+        <TanStackRouterDevtools />
+        <ReactQueryDevtools />
       </div>
-      <TanStackRouterDevtools />
-      <ReactQueryDevtools />
-    </div>
+    </ThemeProvider>
   ),
 })
