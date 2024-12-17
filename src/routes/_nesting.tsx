@@ -4,7 +4,7 @@ export const Route = createFileRoute('/_nesting')({
   component: LayoutComponent,
 })
 
-const firstNestingList = [{ path: '/layout-test', title: 'layout-test' }, { path: '/$test', title: '动态嵌套' }, { path: '/test2', title: '第二层嵌套' }]
+const firstNestingList = [{ path: '/layout-test', title: 'layout-test' }, { path: '/test2', title: '第二层嵌套' }]
 
 function LayoutComponent() {
   return (

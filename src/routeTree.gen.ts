@@ -14,13 +14,13 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as NestingImport } from './routes/_nesting'
+import { Route as PageImport } from './routes/$page'
 import { Route as IndexImport } from './routes/index'
 import { Route as AboutIndexImport } from './routes/about/index'
 import { Route as UserIdImport } from './routes/user/$id'
 import { Route as AboutIdImport } from './routes/about/$id'
 import { Route as NestingLayoutTestImport } from './routes/_nesting/layout-test'
 import { Route as NestingLayoutImport } from './routes/_nesting/_layout'
-import { Route as NestingTestImport } from './routes/_nesting/$test'
 import { Route as groupGroup3Import } from './routes/(group)/group3'
 import { Route as groupGroup2Import } from './routes/(group)/group2'
 import { Route as AboutNameIndexImport } from './routes/about/name/index'
@@ -52,6 +52,12 @@ const StoreLazyRoute = StoreLazyImport.update({
 
 const NestingRoute = NestingImport.update({
   id: '/_nesting',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PageRoute = PageImport.update({
+  id: '/$page',
+  path: '/$page',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -93,12 +99,6 @@ const NestingLayoutTestRoute = NestingLayoutTestImport.update({
 
 const NestingLayoutRoute = NestingLayoutImport.update({
   id: '/_layout',
-  getParentRoute: () => NestingRoute,
-} as any)
-
-const NestingTestRoute = NestingTestImport.update({
-  id: '/$test',
-  path: '/$test',
   getParentRoute: () => NestingRoute,
 } as any)
 
@@ -161,6 +161,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/$page': {
+      id: '/$page'
+      path: '/$page'
+      fullPath: '/$page'
+      preLoaderRoute: typeof PageImport
+      parentRoute: typeof rootRoute
+    }
     '/_nesting': {
       id: '/_nesting'
       path: ''
@@ -195,13 +202,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/group3'
       preLoaderRoute: typeof groupGroup3Import
       parentRoute: typeof rootRoute
-    }
-    '/_nesting/$test': {
-      id: '/_nesting/$test'
-      path: '/$test'
-      fullPath: '/$test'
-      preLoaderRoute: typeof NestingTestImport
-      parentRoute: typeof NestingImport
     }
     '/_nesting/_layout': {
       id: '/_nesting/_layout'
@@ -307,13 +307,11 @@ const NestingLayoutRouteWithChildren = NestingLayoutRoute._addFileChildren(
 )
 
 interface NestingRouteChildren {
-  NestingTestRoute: typeof NestingTestRoute
   NestingLayoutRoute: typeof NestingLayoutRouteWithChildren
   NestingLayoutTestRoute: typeof NestingLayoutTestRoute
 }
 
 const NestingRouteChildren: NestingRouteChildren = {
-  NestingTestRoute: NestingTestRoute,
   NestingLayoutRoute: NestingLayoutRouteWithChildren,
   NestingLayoutTestRoute: NestingLayoutTestRoute,
 }
@@ -337,12 +335,12 @@ const UserLazyRouteWithChildren = UserLazyRoute._addFileChildren(
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$page': typeof PageRoute
   '': typeof NestingLayoutRouteWithChildren
   '/store': typeof StoreLazyRoute
   '/user': typeof UserLazyRouteWithChildren
   '/group2': typeof groupGroup2Route
   '/group3': typeof groupGroup3Route
-  '/$test': typeof NestingTestRoute
   '/layout-test': typeof NestingLayoutTestRoute
   '/about/$id': typeof AboutIdRoute
   '/user/$id': typeof UserIdRoute
@@ -358,11 +356,11 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$page': typeof PageRoute
   '': typeof NestingLayoutRouteWithChildren
   '/store': typeof StoreLazyRoute
   '/group2': typeof groupGroup2Route
   '/group3': typeof groupGroup3Route
-  '/$test': typeof NestingTestRoute
   '/layout-test': typeof NestingLayoutTestRoute
   '/about/$id': typeof AboutIdRoute
   '/user/$id': typeof UserIdRoute
@@ -379,12 +377,12 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/$page': typeof PageRoute
   '/_nesting': typeof NestingRouteWithChildren
   '/store': typeof StoreLazyRoute
   '/user': typeof UserLazyRouteWithChildren
   '/(group)/group2': typeof groupGroup2Route
   '/(group)/group3': typeof groupGroup3Route
-  '/_nesting/$test': typeof NestingTestRoute
   '/_nesting/_layout': typeof NestingLayoutRouteWithChildren
   '/_nesting/layout-test': typeof NestingLayoutTestRoute
   '/about/$id': typeof AboutIdRoute
@@ -403,12 +401,12 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/$page'
     | ''
     | '/store'
     | '/user'
     | '/group2'
     | '/group3'
-    | '/$test'
     | '/layout-test'
     | '/about/$id'
     | '/user/$id'
@@ -423,11 +421,11 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/$page'
     | ''
     | '/store'
     | '/group2'
     | '/group3'
-    | '/$test'
     | '/layout-test'
     | '/about/$id'
     | '/user/$id'
@@ -442,12 +440,12 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/$page'
     | '/_nesting'
     | '/store'
     | '/user'
     | '/(group)/group2'
     | '/(group)/group3'
-    | '/_nesting/$test'
     | '/_nesting/_layout'
     | '/_nesting/layout-test'
     | '/about/$id'
@@ -465,6 +463,7 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PageRoute: typeof PageRoute
   NestingRoute: typeof NestingRouteWithChildren
   StoreLazyRoute: typeof StoreLazyRoute
   UserLazyRoute: typeof UserLazyRouteWithChildren
@@ -480,6 +479,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PageRoute: PageRoute,
   NestingRoute: NestingRouteWithChildren,
   StoreLazyRoute: StoreLazyRoute,
   UserLazyRoute: UserLazyRouteWithChildren,
@@ -504,6 +504,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/$page",
         "/_nesting",
         "/store",
         "/user",
@@ -520,10 +521,12 @@ export const routeTree = rootRoute
     "/": {
       "filePath": "index.tsx"
     },
+    "/$page": {
+      "filePath": "$page.tsx"
+    },
     "/_nesting": {
       "filePath": "_nesting.tsx",
       "children": [
-        "/_nesting/$test",
         "/_nesting/_layout",
         "/_nesting/layout-test"
       ]
@@ -543,10 +546,6 @@ export const routeTree = rootRoute
     },
     "/(group)/group3": {
       "filePath": "(group)/group3.tsx"
-    },
-    "/_nesting/$test": {
-      "filePath": "_nesting/$test.tsx",
-      "parent": "/_nesting"
     },
     "/_nesting/_layout": {
       "filePath": "_nesting/_layout.tsx",

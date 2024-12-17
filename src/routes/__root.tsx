@@ -10,6 +10,7 @@ const routes = [
   { path: '/user', title: 'react query', icon: 'icon-[logos--react-query]' },
   { path: '/layout-test', title: '嵌套路由', icon: 'icon-[ant-design--layout-outlined]' },
   { path: '/group2', title: '分组', icon: 'icon-[icons8--group]' },
+  { path: '/404', title: 'not found page', icon: 'icon-[tabler--error-404]' },
   { path: '/about', title: '关于', icon: 'icon-[ix--about]' },
 ]
 
