@@ -7,7 +7,7 @@ import { useDarkMode } from 'usehooks-ts'
 const routes = [
   { path: '/', title: '首页', icon: 'icon-[line-md--home]' },
   { path: '/store', title: 'zustand 缓存', icon: 'icon-[octicon--cache-24]' },
-  { path: '/posts', title: 'react query', icon: 'icon-[logos--react-query]' },
+  { path: '/user', title: 'react query', icon: 'icon-[logos--react-query]' },
   { path: '/layout-test', title: '嵌套路由', icon: 'icon-[ant-design--layout-outlined]' },
   { path: '/group2', title: '分组', icon: 'icon-[icons8--group]' },
   { path: '/about', title: '关于', icon: 'icon-[ix--about]' },
@@ -31,7 +31,7 @@ function ThemeMode() {
 export const Route = createRootRoute({
   component: () => (
     <div className=" flex h-screen">
-      <ul className=" w-[200px] border-r-2 border-dashed border-blue-300 h-full">
+      <ul className=" w-[200px] flex-none border-r-2 border-dashed border-blue-300 h-full">
         {
           routes.map(item => (
             <li key={item.path} className=" h-10  leading-10 p-2 ">

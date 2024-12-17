@@ -1,11 +1,16 @@
 import type { IUserEntity, IUserList } from './user.type'
 import { queryOptions } from '@tanstack/react-query'
 
+function delay(time: number) {
+  return new Promise(resolve => setTimeout(resolve, time))
+}
+
 const baseUrl = 'https://dummyjson.com/users'
 /**
  * api
  */
 export async function fetchUserList(): Promise<IUserList> {
+  await delay(2000)
   const res = await fetch(`${baseUrl}?limit=3`)
   return res.json()
 }

@@ -3,7 +3,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { userQueryOptions } from '~/api'
 import { queryClient } from '~/store'
 
-export const Route = createFileRoute('/posts/$id')({
+export const Route = createFileRoute('/user/$id')({
   component: RouteComponent,
   loader({ params: { id } }) {
     return queryClient.ensureQueryData(userQueryOptions(+id))
