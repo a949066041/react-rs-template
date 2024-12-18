@@ -1,0 +1,54 @@
+import { useMutation } from '@tanstack/react-query'
+import { createFileRoute, redirect, useRouter } from '@tanstack/react-router'
+import { z } from 'zod'
+import { useAuthStore } from '~/store'
+
+export const Route = createFileRoute('/login')({
+  validateSearch: z.object({
+    redirect: z.string().optional().catch(''),
+  }),
+  component: RouteComponent,
+  beforeLoad({ context: { auth }, search }) {
+    console.log('before login', auth)
+    if (auth && auth.username) {
+      throw redirect({ to: search.redirect || '/page' })
+    }
+  },
+})
+
+function RouteComponent() {
+  const auth = useAuthStore()
+  const router = useRouter()
+  const navigate = Route.useNavigate()
+  const search = Route.useSearch()
+
+  const action = useMutation({
+    mutationKey: ['login'],
+    mutationFn: (username: string) => auth.loginUser(username),
+  })
+
+  async function handleSubmitLogin(evt: React.FormEvent<HTMLFormElement>) {
+    evt.preventDefault()
+    const data = new FormData(evt.currentTarget)
+    const username = data.get('username') as string
+
+    await action.mutate(username)
+    await router.invalidate()
+    await navigate({ to: search.redirect || '/page' })
+  }
+
+  return (
+    <div>
+      this is login page
+      <form className=" mt-2 border-t" onSubmit={handleSubmitLogin}>
+        <label htmlFor="">username： </label>
+        <input name="username" className=" border" required type="text" />
+        <button className=" px-2 border-red-400 border ml-2" type="submit" disabled={action.isPending}>
+          {
+            action.isPending ? 'login...' : 'login'
+          }
+        </button>
+      </form>
+    </div>
+  )
+}

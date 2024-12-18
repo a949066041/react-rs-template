@@ -1,5 +1,7 @@
+import type { QueryClient } from '@tanstack/react-query'
+import type { IUserInfo } from '~/store'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
+import { createRootRouteWithContext, Link, Outlet } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import classix from 'classix'
 import { ThemeProvider, Themes, useTheme } from '~/components'
@@ -10,6 +12,7 @@ const routes = [
   { path: '/user', title: 'react query', icon: 'icon-[logos--react-query]' },
   { path: '/layout-test', title: '嵌套路由', icon: 'icon-[ant-design--layout-outlined]' },
   { path: '/group2', title: '分组', icon: 'icon-[icons8--group]' },
+  { path: '/page', title: '用户鉴权', icon: 'icon-[arcticons--microsoft-authenticator]' },
   { path: '/404', title: 'not found page', icon: 'icon-[tabler--error-404]' },
   { path: '/about', title: '关于', icon: 'icon-[ix--about]' },
 ]
@@ -24,7 +27,12 @@ function ThemeMode() {
   )
 }
 
-export const Route = createRootRoute({
+interface MyRouterContext {
+  queryClient: QueryClient
+  auth?: IUserInfo
+}
+
+export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: () => (
     <ThemeProvider>
       <div className=" flex h-screen dark:bg-black/75 bg-white/85 dark:text-white">

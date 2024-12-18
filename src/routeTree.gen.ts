@@ -13,7 +13,9 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as LoginImport } from './routes/login'
 import { Route as NestingImport } from './routes/_nesting'
+import { Route as AuthImport } from './routes/_auth'
 import { Route as PageImport } from './routes/$page'
 import { Route as IndexImport } from './routes/index'
 import { Route as AboutIndexImport } from './routes/about/index'
@@ -21,6 +23,7 @@ import { Route as UserIdImport } from './routes/user/$id'
 import { Route as AboutIdImport } from './routes/about/$id'
 import { Route as NestingLayoutTestImport } from './routes/_nesting/layout-test'
 import { Route as NestingLayoutImport } from './routes/_nesting/_layout'
+import { Route as AuthPageImport } from './routes/_auth/page'
 import { Route as groupGroup3Import } from './routes/(group)/group3'
 import { Route as groupGroup2Import } from './routes/(group)/group2'
 import { Route as AboutNameIndexImport } from './routes/about/name/index'
@@ -50,8 +53,19 @@ const StoreLazyRoute = StoreLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/store.lazy').then((d) => d.Route))
 
+const LoginRoute = LoginImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const NestingRoute = NestingImport.update({
   id: '/_nesting',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthRoute = AuthImport.update({
+  id: '/_auth',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -100,6 +114,12 @@ const NestingLayoutTestRoute = NestingLayoutTestImport.update({
 const NestingLayoutRoute = NestingLayoutImport.update({
   id: '/_layout',
   getParentRoute: () => NestingRoute,
+} as any)
+
+const AuthPageRoute = AuthPageImport.update({
+  id: '/page',
+  path: '/page',
+  getParentRoute: () => AuthRoute,
 } as any)
 
 const groupGroup3Route = groupGroup3Import.update({
@@ -168,11 +188,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PageImport
       parentRoute: typeof rootRoute
     }
+    '/_auth': {
+      id: '/_auth'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AuthImport
+      parentRoute: typeof rootRoute
+    }
     '/_nesting': {
       id: '/_nesting'
       path: ''
       fullPath: ''
       preLoaderRoute: typeof NestingImport
+      parentRoute: typeof rootRoute
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
     '/store': {
@@ -202,6 +236,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/group3'
       preLoaderRoute: typeof groupGroup3Import
       parentRoute: typeof rootRoute
+    }
+    '/_auth/page': {
+      id: '/_auth/page'
+      path: '/page'
+      fullPath: '/page'
+      preLoaderRoute: typeof AuthPageImport
+      parentRoute: typeof AuthImport
     }
     '/_nesting/_layout': {
       id: '/_nesting/_layout'
@@ -292,6 +333,16 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
+interface AuthRouteChildren {
+  AuthPageRoute: typeof AuthPageRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthPageRoute: AuthPageRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
 interface NestingLayoutRouteChildren {
   NestingLayoutTest2Route: typeof NestingLayoutTest2Route
   NestingLayoutTest3IdRoute: typeof NestingLayoutTest3IdRoute
@@ -337,10 +388,12 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$page': typeof PageRoute
   '': typeof NestingLayoutRouteWithChildren
+  '/login': typeof LoginRoute
   '/store': typeof StoreLazyRoute
   '/user': typeof UserLazyRouteWithChildren
   '/group2': typeof groupGroup2Route
   '/group3': typeof groupGroup3Route
+  '/page': typeof AuthPageRoute
   '/layout-test': typeof NestingLayoutTestRoute
   '/about/$id': typeof AboutIdRoute
   '/user/$id': typeof UserIdRoute
@@ -358,9 +411,11 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$page': typeof PageRoute
   '': typeof NestingLayoutRouteWithChildren
+  '/login': typeof LoginRoute
   '/store': typeof StoreLazyRoute
   '/group2': typeof groupGroup2Route
   '/group3': typeof groupGroup3Route
+  '/page': typeof AuthPageRoute
   '/layout-test': typeof NestingLayoutTestRoute
   '/about/$id': typeof AboutIdRoute
   '/user/$id': typeof UserIdRoute
@@ -378,11 +433,14 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/$page': typeof PageRoute
+  '/_auth': typeof AuthRouteWithChildren
   '/_nesting': typeof NestingRouteWithChildren
+  '/login': typeof LoginRoute
   '/store': typeof StoreLazyRoute
   '/user': typeof UserLazyRouteWithChildren
   '/(group)/group2': typeof groupGroup2Route
   '/(group)/group3': typeof groupGroup3Route
+  '/_auth/page': typeof AuthPageRoute
   '/_nesting/_layout': typeof NestingLayoutRouteWithChildren
   '/_nesting/layout-test': typeof NestingLayoutTestRoute
   '/about/$id': typeof AboutIdRoute
@@ -403,10 +461,12 @@ export interface FileRouteTypes {
     | '/'
     | '/$page'
     | ''
+    | '/login'
     | '/store'
     | '/user'
     | '/group2'
     | '/group3'
+    | '/page'
     | '/layout-test'
     | '/about/$id'
     | '/user/$id'
@@ -423,9 +483,11 @@ export interface FileRouteTypes {
     | '/'
     | '/$page'
     | ''
+    | '/login'
     | '/store'
     | '/group2'
     | '/group3'
+    | '/page'
     | '/layout-test'
     | '/about/$id'
     | '/user/$id'
@@ -441,11 +503,14 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/$page'
+    | '/_auth'
     | '/_nesting'
+    | '/login'
     | '/store'
     | '/user'
     | '/(group)/group2'
     | '/(group)/group3'
+    | '/_auth/page'
     | '/_nesting/_layout'
     | '/_nesting/layout-test'
     | '/about/$id'
@@ -464,7 +529,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PageRoute: typeof PageRoute
+  AuthRoute: typeof AuthRouteWithChildren
   NestingRoute: typeof NestingRouteWithChildren
+  LoginRoute: typeof LoginRoute
   StoreLazyRoute: typeof StoreLazyRoute
   UserLazyRoute: typeof UserLazyRouteWithChildren
   groupGroup2Route: typeof groupGroup2Route
@@ -480,7 +547,9 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PageRoute: PageRoute,
+  AuthRoute: AuthRouteWithChildren,
   NestingRoute: NestingRouteWithChildren,
+  LoginRoute: LoginRoute,
   StoreLazyRoute: StoreLazyRoute,
   UserLazyRoute: UserLazyRouteWithChildren,
   groupGroup2Route: groupGroup2Route,
@@ -505,7 +574,9 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/$page",
+        "/_auth",
         "/_nesting",
+        "/login",
         "/store",
         "/user",
         "/(group)/group2",
@@ -524,12 +595,21 @@ export const routeTree = rootRoute
     "/$page": {
       "filePath": "$page.tsx"
     },
+    "/_auth": {
+      "filePath": "_auth.tsx",
+      "children": [
+        "/_auth/page"
+      ]
+    },
     "/_nesting": {
       "filePath": "_nesting.tsx",
       "children": [
         "/_nesting/_layout",
         "/_nesting/layout-test"
       ]
+    },
+    "/login": {
+      "filePath": "login.tsx"
     },
     "/store": {
       "filePath": "store.lazy.tsx"
@@ -546,6 +626,10 @@ export const routeTree = rootRoute
     },
     "/(group)/group3": {
       "filePath": "(group)/group3.tsx"
+    },
+    "/_auth/page": {
+      "filePath": "_auth/page.tsx",
+      "parent": "/_auth"
     },
     "/_nesting/_layout": {
       "filePath": "_nesting/_layout.tsx",

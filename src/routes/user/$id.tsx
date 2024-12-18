@@ -1,11 +1,10 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 import { userQueryOptions } from '~/api'
-import { queryClient } from '~/store'
 
 export const Route = createFileRoute('/user/$id')({
   component: RouteComponent,
-  loader({ params: { id } }) {
+  loader({ params: { id }, context: { queryClient } }) {
     return queryClient.ensureQueryData(userQueryOptions(+id))
   },
 })
