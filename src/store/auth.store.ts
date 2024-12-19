@@ -18,7 +18,7 @@ export const useAuthStore = create<State & Actions>()(
   immer(set => ({
     userInfo: undefined,
     loginUser: async (username) => {
-      await new Promise(r => setTimeout(r, 200))
+      await new Promise(r => setTimeout(r, 2000))
       set((state) => {
         state.userInfo = { username }
       })

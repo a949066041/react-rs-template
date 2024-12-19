@@ -9,7 +9,6 @@ export const Route = createFileRoute('/login')({
   }),
   component: RouteComponent,
   beforeLoad({ context: { auth }, search }) {
-    console.log('before login', auth)
     if (auth && auth.username) {
       throw redirect({ to: search.redirect || '/page' })
     }
@@ -32,8 +31,7 @@ function RouteComponent() {
     const data = new FormData(evt.currentTarget)
     const username = data.get('username') as string
 
-    await action.mutate(username)
-    await router.invalidate()
+    await action.mutateAsync(username)
     await navigate({ to: search.redirect || '/page' })
   }
 
