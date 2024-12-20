@@ -1,19 +1,21 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 import { userQueryOptions } from '~/api'
 
 export const Route = createFileRoute('/user/$id')({
   component: RouteComponent,
-  loader({ params: { id }, context: { queryClient } }) {
-    return queryClient.ensureQueryData(userQueryOptions(+id))
-  },
 })
 
 function RouteComponent() {
   const { id } = Route.useParams()
-  const { data } = useSuspenseQuery(userQueryOptions(+id))
+  const { data, isLoading } = useQuery(userQueryOptions(+id))
+
+  if (isLoading) {
+    return 'loading...'
+  }
+
   return (
-    <div>
+    <div className=" whitespace-pre overflow-hidden text-ellipsis w-full">
       data：
       {' '}
       { JSON.stringify(data) }

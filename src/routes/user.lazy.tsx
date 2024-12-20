@@ -10,10 +10,15 @@ export const Route = createLazyFileRoute('/user')({
 })
 
 function RouteComponent() {
-  const { data } = useSuspenseQuery(userQueryListOptions)
+  const { data, refetch, isLoading, isFetching } = useSuspenseQuery(userQueryListOptions)
+
+  if (isLoading || isFetching) {
+    return <div>loading...</div>
+  }
 
   return (
     <div className=" space-x-3 ">
+      <button type="button" onClick={() => refetch()}>click </button>
       <ul className=" w-1/3 bg-green-300 px-2 rounded-lg">
         {data.users.map(item => (
           <li key={item.id}>

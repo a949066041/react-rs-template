@@ -48,7 +48,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
             ))
           }
         </ul>
-        <div className="  flex-1 py-2 px-3">
+        <div className="  flex-1 py-2 px-3 overflow-hidden">
           <header className=" text-right">
             <span className=" justify-end">
               <ThemeMode />
