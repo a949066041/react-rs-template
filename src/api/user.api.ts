@@ -20,7 +20,7 @@ export async function fetchUser(id: IUserEntity['id']): Promise<IUserEntity> {
   return res.json()
 }
 
-const USER_PAGER_LIMIT = 100
+const USER_PAGER_LIMIT = 10
 export async function fetchUserPager({ pageParam: offset }: { pageParam: number }): Promise<IUserList> {
   const res = await fetch(`${baseUrl}?limit=${USER_PAGER_LIMIT}&skip=${offset}`)
   return res.json()
@@ -44,7 +44,15 @@ export const userQueryPagerOptions = infiniteQueryOptions({
   queryKey: ['user-pager'],
   queryFn: fetchUserPager,
   initialPageParam: 0,
-  getNextPageParam: (res, list) => res.total > list.map(item => item.users).flat().length
-    ? (res.skip + USER_PAGER_LIMIT)
-    : undefined,
+  select(data) {
+    return {
+      pages: data.pages.map(item => item.users).flat(),
+      pageParams: data.pageParams,
+    }
+  },
+  getNextPageParam: (res, list) => {
+    return res.total > list.map(item => item.users).flat().length
+      ? (res.skip + USER_PAGER_LIMIT)
+      : undefined
+  },
 })

@@ -3,9 +3,13 @@ import { createFileRoute } from '@tanstack/react-router'
 import React, { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { userQueryPagerOptions } from '~/api'
+import { queryClient } from '~/store'
 
 export const Route = createFileRoute('/user/pager')({
   component: RouteComponent,
+  loader() {
+    queryClient.removeQueries({ queryKey: ['user-pager'] })
+  },
 })
 
 function RouteComponent() {
@@ -25,11 +29,9 @@ function RouteComponent() {
   return (
     <div className=" h-[200px] overflow-auto">
       <ul>
-        { data?.pages.map(page => (
-          <React.Fragment key={page.skip}>
-            { page.users.map(item => <li key={item.id}>{ item.firstName }</li>) }
-          </React.Fragment>
-        )) }
+        {
+          data?.pages.map(item => <li key={item.id}>{ item.firstName }</li>)
+        }
       </ul>
       <button ref={ref} type="button" onClick={() => fetchNextPage()} disabled={!hasNextPage || isFetchingNextPage}>
         {isFetchingNextPage
