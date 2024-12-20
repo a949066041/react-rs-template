@@ -32,6 +32,7 @@ function RouteComponent() {
     const username = data.get('username') as string
 
     await action.mutateAsync(username)
+    await router.invalidate()
     await navigate({ to: search.redirect || '/page' })
   }
 

@@ -6,4 +6,6 @@ export interface IUserEntity {
 
 export interface IUserList {
   users: IUserEntity[]
+  skip: number
+  total: number
 }

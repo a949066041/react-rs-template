@@ -19,6 +19,7 @@ import { Route as AuthImport } from './routes/_auth'
 import { Route as PageImport } from './routes/$page'
 import { Route as IndexImport } from './routes/index'
 import { Route as AboutIndexImport } from './routes/about/index'
+import { Route as UserPagerImport } from './routes/user/pager'
 import { Route as UserIdImport } from './routes/user/$id'
 import { Route as AboutIdImport } from './routes/about/$id'
 import { Route as NestingLayoutTestImport } from './routes/_nesting/layout-test'
@@ -91,6 +92,12 @@ const AboutIndexRoute = AboutIndexImport.update({
   id: '/about/',
   path: '/about/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const UserPagerRoute = UserPagerImport.update({
+  id: '/pager',
+  path: '/pager',
+  getParentRoute: () => UserLazyRoute,
 } as any)
 
 const UserIdRoute = UserIdImport.update({
@@ -272,6 +279,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UserIdImport
       parentRoute: typeof UserLazyImport
     }
+    '/user/pager': {
+      id: '/user/pager'
+      path: '/pager'
+      fullPath: '/user/pager'
+      preLoaderRoute: typeof UserPagerImport
+      parentRoute: typeof UserLazyImport
+    }
     '/about/': {
       id: '/about/'
       path: '/about'
@@ -372,11 +386,13 @@ const NestingRouteWithChildren =
 
 interface UserLazyRouteChildren {
   UserIdRoute: typeof UserIdRoute
+  UserPagerRoute: typeof UserPagerRoute
   UserIndexLazyRoute: typeof UserIndexLazyRoute
 }
 
 const UserLazyRouteChildren: UserLazyRouteChildren = {
   UserIdRoute: UserIdRoute,
+  UserPagerRoute: UserPagerRoute,
   UserIndexLazyRoute: UserIndexLazyRoute,
 }
 
@@ -397,6 +413,7 @@ export interface FileRoutesByFullPath {
   '/layout-test': typeof NestingLayoutTestRoute
   '/about/$id': typeof AboutIdRoute
   '/user/$id': typeof UserIdRoute
+  '/user/pager': typeof UserPagerRoute
   '/about': typeof AboutIndexRoute
   '/user/': typeof UserIndexLazyRoute
   '/test2': typeof NestingLayoutTest2Route
@@ -419,6 +436,7 @@ export interface FileRoutesByTo {
   '/layout-test': typeof NestingLayoutTestRoute
   '/about/$id': typeof AboutIdRoute
   '/user/$id': typeof UserIdRoute
+  '/user/pager': typeof UserPagerRoute
   '/about': typeof AboutIndexRoute
   '/user': typeof UserIndexLazyRoute
   '/test2': typeof NestingLayoutTest2Route
@@ -445,6 +463,7 @@ export interface FileRoutesById {
   '/_nesting/layout-test': typeof NestingLayoutTestRoute
   '/about/$id': typeof AboutIdRoute
   '/user/$id': typeof UserIdRoute
+  '/user/pager': typeof UserPagerRoute
   '/about/': typeof AboutIndexRoute
   '/user/': typeof UserIndexLazyRoute
   '/_nesting/_layout/test2': typeof NestingLayoutTest2Route
@@ -470,6 +489,7 @@ export interface FileRouteTypes {
     | '/layout-test'
     | '/about/$id'
     | '/user/$id'
+    | '/user/pager'
     | '/about'
     | '/user/'
     | '/test2'
@@ -491,6 +511,7 @@ export interface FileRouteTypes {
     | '/layout-test'
     | '/about/$id'
     | '/user/$id'
+    | '/user/pager'
     | '/about'
     | '/user'
     | '/test2'
@@ -515,6 +536,7 @@ export interface FileRouteTypes {
     | '/_nesting/layout-test'
     | '/about/$id'
     | '/user/$id'
+    | '/user/pager'
     | '/about/'
     | '/user/'
     | '/_nesting/_layout/test2'
@@ -618,6 +640,7 @@ export const routeTree = rootRoute
       "filePath": "user.lazy.tsx",
       "children": [
         "/user/$id",
+        "/user/pager",
         "/user/"
       ]
     },
@@ -648,6 +671,10 @@ export const routeTree = rootRoute
     },
     "/user/$id": {
       "filePath": "user/$id.tsx",
+      "parent": "/user"
+    },
+    "/user/pager": {
+      "filePath": "user/pager.tsx",
       "parent": "/user"
     },
     "/about/": {
