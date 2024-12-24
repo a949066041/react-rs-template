@@ -21,6 +21,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-intersection-observer": "^9.14.0",
+    "react-scan": "^0.0.54",
     "usehooks-ts": "^3.1.0",
     "zod": "^3.24.1",
     "zustand": "^5.0.2"

@@ -1,8 +1,16 @@
 import { QueryClientProvider } from '@tanstack/react-query'
 import ReactDOM from 'react-dom/client'
+import { scan } from 'react-scan'
 import App from './App'
 import { queryClient } from './store'
 import './style/index.css'
+
+if (typeof window !== 'undefined') {
+  scan({
+    enabled: true,
+    log: true, // logs render info to console (default: false)
+  })
+}
 
 function bootstrap() {
   const rootEl = document.getElementById('root')
