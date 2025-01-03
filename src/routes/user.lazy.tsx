@@ -10,7 +10,7 @@ export const Route = createLazyFileRoute('/user')({
 })
 
 function RouteComponent() {
-  const { data, refetch, isLoading, isFetching } = useSuspenseQuery(userQueryListOptions)
+  const { data, isLoading, isFetching } = useSuspenseQuery(userQueryListOptions)
 
   if (isLoading || isFetching) {
     return <div>loading...</div>
@@ -25,7 +25,7 @@ function RouteComponent() {
             <Link
               to="/user/$id"
               className=" flex items-center"
-              params={{ id: item.id }}
+              params={{ id: `${item.id}` }}
             >
               {`${item.firstName} ${item.lastName}`}
               <span className="icon-[maki--arrow] ml-2"></span>

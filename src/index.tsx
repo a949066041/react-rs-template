@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom/client'
 import { scan } from 'react-scan'
 import App from './App'
 import { queryClient } from './store'
+import './setup'
 import './style/index.css'
 
 if (typeof window !== 'undefined') {
   scan({
-    enabled: true,
+    enabled: false,
     log: false, // logs render info to console (default: false)
   })
 }

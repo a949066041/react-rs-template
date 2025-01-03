@@ -49,6 +49,7 @@
   ],
   "explorer.fileNesting.patterns": {
     "package.json": "pnpm-lock.yaml",
-    "config.ts": "*.config.ts, *.config.js, *.config.cjs, *.config.mjs,tsconfig.json, jsconfig.json"
+    "config.ts": "*.config.ts, *.config.js, *.config.cjs, *.config.mjs,tsconfig.json, jsconfig.json",
+    "*.api.ts": "$(capture).api.ts, $(capture).type.ts"
   }
 }

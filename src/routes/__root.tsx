@@ -1,5 +1,4 @@
 import type { QueryClient } from '@tanstack/react-query'
-import type { IUserInfo } from '~/store'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { createRootRouteWithContext, Link, Outlet } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
@@ -29,7 +28,7 @@ function ThemeMode() {
 
 interface MyRouterContext {
   queryClient: QueryClient
-  auth?: IUserInfo
+  auth?: string
 }
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({

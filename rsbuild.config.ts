@@ -12,6 +12,14 @@ export default defineConfig({
   html: {
     title: 'template rs ',
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8085',
+        pathRewrite: path => path.replace('/api', ''),
+      },
+    },
+  },
   tools: {
     rspack: {
       plugins: [TanStackRouterRspack()],

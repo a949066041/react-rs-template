@@ -1,31 +1,41 @@
+import type { AuthLogin, AuthUserRes } from '~/api'
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
-
-export interface IUserInfo {
-  username: string
-}
+import { authInfoQueryOption, authLogin, authLogout } from '~/api'
+import { queryClient } from '.'
+import { useCacheStore } from './cache.store'
 
 interface State {
-  userInfo?: IUserInfo
+  userInfo?: AuthUserRes
 }
 
 interface Actions {
-  loginUser: (username: IUserInfo['username']) => Promise<void>
+  loginUser: (form: AuthLogin) => Promise<void>
+  refreshUser: () => Promise<void>
   logoutUser: () => void
 }
 
 export const useAuthStore = create<State & Actions>()(
   immer(set => ({
     userInfo: undefined,
-    loginUser: async (username) => {
-      await new Promise(r => setTimeout(r, 2000))
+    async refreshUser() {
+      const userInfo = await queryClient.ensureQueryData(authInfoQueryOption)
       set((state) => {
-        state.userInfo = { username }
+        state.userInfo = userInfo
       })
     },
-    logoutUser: () =>
+    async loginUser(form) {
+      const res = await authLogin(form)
+      const { setCookie } = useCacheStore.getState()
+      setCookie(res.token)
+    },
+    async logoutUser() {
+      const { setCookie } = useCacheStore.getState()
+      await authLogout()
+      setCookie(undefined)
       set((state) => {
         state.userInfo = undefined
-      }),
+      })
+    },
   })),
 )

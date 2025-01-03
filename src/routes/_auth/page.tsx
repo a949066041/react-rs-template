@@ -10,7 +10,7 @@ function RouteComponent() {
   const router = useRouter()
 
   async function logoutAction() {
-    logoutUser()
+    await logoutUser()
 
     await router.invalidate()
   }
@@ -18,7 +18,7 @@ function RouteComponent() {
   return (
     <div>
       Hello "/_auth/page"
-      { userInfo?.username }
+      { JSON.stringify(userInfo) }
       <button type="button" onClick={logoutAction}>logout</button>
     </div>
   )
