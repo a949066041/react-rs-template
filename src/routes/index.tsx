@@ -8,7 +8,7 @@ export const Route = createFileRoute('/')({
 function RouteComponent() {
   return (
     <div>
-      home page
+      123home page
     </div>
   )
 }

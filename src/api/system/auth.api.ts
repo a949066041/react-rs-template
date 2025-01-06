@@ -27,4 +27,5 @@ export async function authInfo() {
 export const authInfoQueryOption = queryOptions({
   queryKey: ['auth', 'info'],
   queryFn: authInfo,
+  refetchOnMount: false,
 })

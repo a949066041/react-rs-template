@@ -16,7 +16,7 @@ export const fetchClient = {
 
     const response = await res.json() as T
 
-    if (schema && response) {
+    if (import.meta.env.DEV && schema && response) {
       const res = schema.safeParse(response)
       if (!res.success) {
         console.error('get action value error', res)
@@ -36,7 +36,7 @@ export const fetchClient = {
 
     const response = await res.json() as T
 
-    if (schema && response) {
+    if (import.meta.env.DEV && schema && response) {
       const res = schema.safeParse(response)
       if (!res.success) {
         throw new Error('post action res value error', res.data)
@@ -60,7 +60,7 @@ export const fetchClient = {
 
     const response = await res.json() as T
 
-    if (schema && response) {
+    if (import.meta.env.DEV && schema && response) {
       const res = schema.safeParse(response)
       if (!res.success) {
         console.error('get action value error', res)

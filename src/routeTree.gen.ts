@@ -32,7 +32,14 @@ import { Route as AboutValueIndexImport } from './routes/about/$value/index'
 import { Route as AboutNameNameImport } from './routes/about/name/$name'
 import { Route as AboutValueCreateImport } from './routes/about/$value/create'
 import { Route as NestingLayoutTest2Import } from './routes/_nesting/_layout/test2'
+import { Route as AuthNestedMenu2Import } from './routes/_auth/nested/menu2'
+import { Route as AuthSystemUserIndexImport } from './routes/_auth/system/user/index'
+import { Route as AuthSystemRoleIndexImport } from './routes/_auth/system/role/index'
+import { Route as AuthSystemMenuIndexImport } from './routes/_auth/system/menu/index'
+import { Route as AuthSystemDictIndexImport } from './routes/_auth/system/dict/index'
 import { Route as NestingLayoutTest3IdImport } from './routes/_nesting/_layout/test3.$id'
+import { Route as AuthNestedMenu1Menu12Import } from './routes/_auth/nested/menu1/menu1-2'
+import { Route as AuthNestedMenu1Menu11Import } from './routes/_auth/nested/menu1/menu1-1'
 
 // Create Virtual Routes
 
@@ -171,10 +178,52 @@ const NestingLayoutTest2Route = NestingLayoutTest2Import.update({
   getParentRoute: () => NestingLayoutRoute,
 } as any)
 
+const AuthNestedMenu2Route = AuthNestedMenu2Import.update({
+  id: '/nested/menu2',
+  path: '/nested/menu2',
+  getParentRoute: () => AuthRoute,
+} as any)
+
+const AuthSystemUserIndexRoute = AuthSystemUserIndexImport.update({
+  id: '/system/user/',
+  path: '/system/user/',
+  getParentRoute: () => AuthRoute,
+} as any)
+
+const AuthSystemRoleIndexRoute = AuthSystemRoleIndexImport.update({
+  id: '/system/role/',
+  path: '/system/role/',
+  getParentRoute: () => AuthRoute,
+} as any)
+
+const AuthSystemMenuIndexRoute = AuthSystemMenuIndexImport.update({
+  id: '/system/menu/',
+  path: '/system/menu/',
+  getParentRoute: () => AuthRoute,
+} as any)
+
+const AuthSystemDictIndexRoute = AuthSystemDictIndexImport.update({
+  id: '/system/dict/',
+  path: '/system/dict/',
+  getParentRoute: () => AuthRoute,
+} as any)
+
 const NestingLayoutTest3IdRoute = NestingLayoutTest3IdImport.update({
   id: '/test3/$id',
   path: '/test3/$id',
   getParentRoute: () => NestingLayoutRoute,
+} as any)
+
+const AuthNestedMenu1Menu12Route = AuthNestedMenu1Menu12Import.update({
+  id: '/nested/menu1/menu1-2',
+  path: '/nested/menu1/menu1-2',
+  getParentRoute: () => AuthRoute,
+} as any)
+
+const AuthNestedMenu1Menu11Route = AuthNestedMenu1Menu11Import.update({
+  id: '/nested/menu1/menu1-1',
+  path: '/nested/menu1/menu1-1',
+  getParentRoute: () => AuthRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -300,6 +349,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UserIndexLazyImport
       parentRoute: typeof UserLazyImport
     }
+    '/_auth/nested/menu2': {
+      id: '/_auth/nested/menu2'
+      path: '/nested/menu2'
+      fullPath: '/nested/menu2'
+      preLoaderRoute: typeof AuthNestedMenu2Import
+      parentRoute: typeof AuthImport
+    }
     '/_nesting/_layout/test2': {
       id: '/_nesting/_layout/test2'
       path: '/test2'
@@ -335,12 +391,54 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutNameIndexImport
       parentRoute: typeof rootRoute
     }
+    '/_auth/nested/menu1/menu1-1': {
+      id: '/_auth/nested/menu1/menu1-1'
+      path: '/nested/menu1/menu1-1'
+      fullPath: '/nested/menu1/menu1-1'
+      preLoaderRoute: typeof AuthNestedMenu1Menu11Import
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/nested/menu1/menu1-2': {
+      id: '/_auth/nested/menu1/menu1-2'
+      path: '/nested/menu1/menu1-2'
+      fullPath: '/nested/menu1/menu1-2'
+      preLoaderRoute: typeof AuthNestedMenu1Menu12Import
+      parentRoute: typeof AuthImport
+    }
     '/_nesting/_layout/test3/$id': {
       id: '/_nesting/_layout/test3/$id'
       path: '/test3/$id'
       fullPath: '/test3/$id'
       preLoaderRoute: typeof NestingLayoutTest3IdImport
       parentRoute: typeof NestingLayoutImport
+    }
+    '/_auth/system/dict/': {
+      id: '/_auth/system/dict/'
+      path: '/system/dict'
+      fullPath: '/system/dict'
+      preLoaderRoute: typeof AuthSystemDictIndexImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/system/menu/': {
+      id: '/_auth/system/menu/'
+      path: '/system/menu'
+      fullPath: '/system/menu'
+      preLoaderRoute: typeof AuthSystemMenuIndexImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/system/role/': {
+      id: '/_auth/system/role/'
+      path: '/system/role'
+      fullPath: '/system/role'
+      preLoaderRoute: typeof AuthSystemRoleIndexImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/system/user/': {
+      id: '/_auth/system/user/'
+      path: '/system/user'
+      fullPath: '/system/user'
+      preLoaderRoute: typeof AuthSystemUserIndexImport
+      parentRoute: typeof AuthImport
     }
   }
 }
@@ -349,10 +447,24 @@ declare module '@tanstack/react-router' {
 
 interface AuthRouteChildren {
   AuthPageRoute: typeof AuthPageRoute
+  AuthNestedMenu2Route: typeof AuthNestedMenu2Route
+  AuthNestedMenu1Menu11Route: typeof AuthNestedMenu1Menu11Route
+  AuthNestedMenu1Menu12Route: typeof AuthNestedMenu1Menu12Route
+  AuthSystemDictIndexRoute: typeof AuthSystemDictIndexRoute
+  AuthSystemMenuIndexRoute: typeof AuthSystemMenuIndexRoute
+  AuthSystemRoleIndexRoute: typeof AuthSystemRoleIndexRoute
+  AuthSystemUserIndexRoute: typeof AuthSystemUserIndexRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthPageRoute: AuthPageRoute,
+  AuthNestedMenu2Route: AuthNestedMenu2Route,
+  AuthNestedMenu1Menu11Route: AuthNestedMenu1Menu11Route,
+  AuthNestedMenu1Menu12Route: AuthNestedMenu1Menu12Route,
+  AuthSystemDictIndexRoute: AuthSystemDictIndexRoute,
+  AuthSystemMenuIndexRoute: AuthSystemMenuIndexRoute,
+  AuthSystemRoleIndexRoute: AuthSystemRoleIndexRoute,
+  AuthSystemUserIndexRoute: AuthSystemUserIndexRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
@@ -416,12 +528,19 @@ export interface FileRoutesByFullPath {
   '/user/pager': typeof UserPagerRoute
   '/about': typeof AboutIndexRoute
   '/user/': typeof UserIndexLazyRoute
+  '/nested/menu2': typeof AuthNestedMenu2Route
   '/test2': typeof NestingLayoutTest2Route
   '/about/$value/create': typeof AboutValueCreateRoute
   '/about/name/$name': typeof AboutNameNameRoute
   '/about/$value': typeof AboutValueIndexRoute
   '/about/name': typeof AboutNameIndexRoute
+  '/nested/menu1/menu1-1': typeof AuthNestedMenu1Menu11Route
+  '/nested/menu1/menu1-2': typeof AuthNestedMenu1Menu12Route
   '/test3/$id': typeof NestingLayoutTest3IdRoute
+  '/system/dict': typeof AuthSystemDictIndexRoute
+  '/system/menu': typeof AuthSystemMenuIndexRoute
+  '/system/role': typeof AuthSystemRoleIndexRoute
+  '/system/user': typeof AuthSystemUserIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -439,12 +558,19 @@ export interface FileRoutesByTo {
   '/user/pager': typeof UserPagerRoute
   '/about': typeof AboutIndexRoute
   '/user': typeof UserIndexLazyRoute
+  '/nested/menu2': typeof AuthNestedMenu2Route
   '/test2': typeof NestingLayoutTest2Route
   '/about/$value/create': typeof AboutValueCreateRoute
   '/about/name/$name': typeof AboutNameNameRoute
   '/about/$value': typeof AboutValueIndexRoute
   '/about/name': typeof AboutNameIndexRoute
+  '/nested/menu1/menu1-1': typeof AuthNestedMenu1Menu11Route
+  '/nested/menu1/menu1-2': typeof AuthNestedMenu1Menu12Route
   '/test3/$id': typeof NestingLayoutTest3IdRoute
+  '/system/dict': typeof AuthSystemDictIndexRoute
+  '/system/menu': typeof AuthSystemMenuIndexRoute
+  '/system/role': typeof AuthSystemRoleIndexRoute
+  '/system/user': typeof AuthSystemUserIndexRoute
 }
 
 export interface FileRoutesById {
@@ -466,12 +592,19 @@ export interface FileRoutesById {
   '/user/pager': typeof UserPagerRoute
   '/about/': typeof AboutIndexRoute
   '/user/': typeof UserIndexLazyRoute
+  '/_auth/nested/menu2': typeof AuthNestedMenu2Route
   '/_nesting/_layout/test2': typeof NestingLayoutTest2Route
   '/about/$value/create': typeof AboutValueCreateRoute
   '/about/name/$name': typeof AboutNameNameRoute
   '/about/$value/': typeof AboutValueIndexRoute
   '/about/name/': typeof AboutNameIndexRoute
+  '/_auth/nested/menu1/menu1-1': typeof AuthNestedMenu1Menu11Route
+  '/_auth/nested/menu1/menu1-2': typeof AuthNestedMenu1Menu12Route
   '/_nesting/_layout/test3/$id': typeof NestingLayoutTest3IdRoute
+  '/_auth/system/dict/': typeof AuthSystemDictIndexRoute
+  '/_auth/system/menu/': typeof AuthSystemMenuIndexRoute
+  '/_auth/system/role/': typeof AuthSystemRoleIndexRoute
+  '/_auth/system/user/': typeof AuthSystemUserIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -492,12 +625,19 @@ export interface FileRouteTypes {
     | '/user/pager'
     | '/about'
     | '/user/'
+    | '/nested/menu2'
     | '/test2'
     | '/about/$value/create'
     | '/about/name/$name'
     | '/about/$value'
     | '/about/name'
+    | '/nested/menu1/menu1-1'
+    | '/nested/menu1/menu1-2'
     | '/test3/$id'
+    | '/system/dict'
+    | '/system/menu'
+    | '/system/role'
+    | '/system/user'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -514,12 +654,19 @@ export interface FileRouteTypes {
     | '/user/pager'
     | '/about'
     | '/user'
+    | '/nested/menu2'
     | '/test2'
     | '/about/$value/create'
     | '/about/name/$name'
     | '/about/$value'
     | '/about/name'
+    | '/nested/menu1/menu1-1'
+    | '/nested/menu1/menu1-2'
     | '/test3/$id'
+    | '/system/dict'
+    | '/system/menu'
+    | '/system/role'
+    | '/system/user'
   id:
     | '__root__'
     | '/'
@@ -539,12 +686,19 @@ export interface FileRouteTypes {
     | '/user/pager'
     | '/about/'
     | '/user/'
+    | '/_auth/nested/menu2'
     | '/_nesting/_layout/test2'
     | '/about/$value/create'
     | '/about/name/$name'
     | '/about/$value/'
     | '/about/name/'
+    | '/_auth/nested/menu1/menu1-1'
+    | '/_auth/nested/menu1/menu1-2'
     | '/_nesting/_layout/test3/$id'
+    | '/_auth/system/dict/'
+    | '/_auth/system/menu/'
+    | '/_auth/system/role/'
+    | '/_auth/system/user/'
   fileRoutesById: FileRoutesById
 }
 
@@ -620,7 +774,14 @@ export const routeTree = rootRoute
     "/_auth": {
       "filePath": "_auth.tsx",
       "children": [
-        "/_auth/page"
+        "/_auth/page",
+        "/_auth/nested/menu2",
+        "/_auth/nested/menu1/menu1-1",
+        "/_auth/nested/menu1/menu1-2",
+        "/_auth/system/dict/",
+        "/_auth/system/menu/",
+        "/_auth/system/role/",
+        "/_auth/system/user/"
       ]
     },
     "/_nesting": {
@@ -684,6 +845,10 @@ export const routeTree = rootRoute
       "filePath": "user/index.lazy.tsx",
       "parent": "/user"
     },
+    "/_auth/nested/menu2": {
+      "filePath": "_auth/nested/menu2.tsx",
+      "parent": "/_auth"
+    },
     "/_nesting/_layout/test2": {
       "filePath": "_nesting/_layout/test2.tsx",
       "parent": "/_nesting/_layout"
@@ -700,9 +865,33 @@ export const routeTree = rootRoute
     "/about/name/": {
       "filePath": "about/name/index.tsx"
     },
+    "/_auth/nested/menu1/menu1-1": {
+      "filePath": "_auth/nested/menu1/menu1-1.tsx",
+      "parent": "/_auth"
+    },
+    "/_auth/nested/menu1/menu1-2": {
+      "filePath": "_auth/nested/menu1/menu1-2.tsx",
+      "parent": "/_auth"
+    },
     "/_nesting/_layout/test3/$id": {
       "filePath": "_nesting/_layout/test3.$id.tsx",
       "parent": "/_nesting/_layout"
+    },
+    "/_auth/system/dict/": {
+      "filePath": "_auth/system/dict/index.tsx",
+      "parent": "/_auth"
+    },
+    "/_auth/system/menu/": {
+      "filePath": "_auth/system/menu/index.tsx",
+      "parent": "/_auth"
+    },
+    "/_auth/system/role/": {
+      "filePath": "_auth/system/role/index.tsx",
+      "parent": "/_auth"
+    },
+    "/_auth/system/user/": {
+      "filePath": "_auth/system/user/index.tsx",
+      "parent": "/_auth"
     }
   }
 }

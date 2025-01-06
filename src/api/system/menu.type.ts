@@ -25,6 +25,11 @@ export const menuSchema = z.object({
 
 type IMenuTree = z.infer<typeof menuSchema>
 
+export interface IBuildMenu {
+  menu: MenuTree[]
+  btn: string[]
+}
+
 export interface MenuTree {
   id: string
   pid: string

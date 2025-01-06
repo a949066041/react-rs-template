@@ -1,9 +1,8 @@
 import { createRouter, RouterProvider } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
 import { queryClient } from './store'
-import { useCacheStore } from './store/cache.store'
 
-const router = createRouter({ routeTree, context: { queryClient, auth: '' } })
+const router = createRouter({ routeTree, context: { queryClient, auth: null, permission: [], menuList: [] } })
 
 declare module '@tanstack/react-router' {
   interface Register {
@@ -12,7 +11,5 @@ declare module '@tanstack/react-router' {
 }
 
 export default function App() {
-  const { cookie } = useCacheStore()
-
-  return <RouterProvider router={router} context={{ auth: cookie, queryClient }} />
+  return <RouterProvider router={router} context={{ auth: null, queryClient, permission: [], menuList: [] }} />
 }
