@@ -1,5 +1,7 @@
 export * from './auth.api'
 export * from './auth.type'
+export * from './dict.api'
+export * from './dict.type'
 export * from './menu.api'
 export * from './menu.type'
 export * from './user.api'
