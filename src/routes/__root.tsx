@@ -1,7 +1,6 @@
 import type { QueryClient } from '@tanstack/react-query'
 import type { AuthUserRes, IBuildMenu } from '~/api'
 import { createRootRouteWithContext, Outlet } from '@tanstack/react-router'
-import { ThemeProvider } from '~/components'
 
 export interface MyRouterContext {
   queryClient: QueryClient
@@ -12,8 +11,6 @@ export interface MyRouterContext {
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: () => (
-    <ThemeProvider>
-      <Outlet />
-    </ThemeProvider>
+    <Outlet />
   ),
 })

@@ -1,7 +1,7 @@
 import type { AuthLogin } from '~/api'
 import { useForm } from '@tanstack/react-form'
 import { useMutation } from '@tanstack/react-query'
-import { createFileRoute, redirect, useRouter } from '@tanstack/react-router'
+import { createFileRoute, redirect } from '@tanstack/react-router'
 import { z } from 'zod'
 import { useAuthStore } from '~/store'
 
@@ -19,7 +19,6 @@ export const Route = createFileRoute('/login')({
 
 function RouteComponent() {
   const auth = useAuthStore()
-  const router = useRouter()
   const navigate = Route.useNavigate()
   const search = Route.useSearch()
 
@@ -35,7 +34,6 @@ function RouteComponent() {
     },
     async onSubmit({ value }) {
       await loginAction.mutateAsync(value)
-      await router.invalidate()
       await navigate({ to: search.redirect || '/page' })
     },
   })

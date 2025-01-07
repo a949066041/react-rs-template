@@ -30,9 +30,11 @@ export interface IBuildMenu {
   btn: string[]
 }
 
-export interface MenuTree {
+export interface TreeNode<T> {
   id: string
   pid: string
-  data: IMenuTree
-  children: MenuTree[]
+  data: T
+  children: TreeNode<T>[]
 }
+
+export type MenuTree = TreeNode<IMenuTree>
