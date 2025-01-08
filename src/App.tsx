@@ -14,15 +14,11 @@ declare module '@tanstack/react-router' {
 export default function App() {
   const authStore = useAuthStore()
   useEffect(() => {
-    const unSubscribe = useAuthStore.subscribe((state, prevState) => {
+    return useAuthStore.subscribe((state, prevState) => {
       if (state.userInfo !== prevState.userInfo) {
         router.invalidate()
       }
     })
-
-    return () => {
-      unSubscribe()
-    }
   }, [])
   return (
     <RouterProvider

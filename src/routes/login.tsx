@@ -1,4 +1,4 @@
-import { Button, PasswordInput, TextInput } from '@mantine/core'
+import { Box, Button, PasswordInput, TextInput } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useMutation } from '@tanstack/react-query'
 import { createFileRoute, redirect } from '@tanstack/react-router'
@@ -19,12 +19,20 @@ export const Route = createFileRoute('/login')({
   },
 })
 
+function initForm() {
+  return {
+    username: isDev ? 'admin' : '',
+    password: isDev ? '123456' : '',
+  }
+}
+
 function RouteComponent() {
   const auth = useAuthStore()
   const navigate = Route.useNavigate()
   const search = Route.useSearch()
 
   const form = useForm<AuthLogin>({
+    initialValues: initForm(),
     validate: zodResolver(authLoginSchema),
   })
 
@@ -33,10 +41,10 @@ function RouteComponent() {
     mutationFn: (value: AuthLogin) => auth.loginUser(value),
   })
 
-  async function handleLoginSubmit(value: AuthLogin) {
+  async function handleLoginSubmit() {
     const { hasErrors } = form.validate()
     if (!hasErrors) {
-      await loginAction.mutateAsync(value)
+      await loginAction.mutateAsync(form.getValues())
       await navigate({ to: search.redirect || '/page' })
     }
   }
@@ -61,10 +69,14 @@ function RouteComponent() {
           key={form.key('password')}
           {...form.getInputProps('password')}
         />
-
-        <Button loading={loginAction.isPending} type="submit" mt="sm">
-          Submit
-        </Button>
+        <Box>
+          <Button loading={loginAction.isPending} type="submit">
+            Submit
+          </Button>
+          <Button type="button" onClick={form.reset} variant="default">
+            reset
+          </Button>
+        </Box>
       </form>
     </div>
   )

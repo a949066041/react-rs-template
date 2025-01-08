@@ -1,6 +1,9 @@
 import { createTheme, MantineProvider } from '@mantine/core'
+
 import { Notifications } from '@mantine/notifications'
 import { QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
 import ReactDOM from 'react-dom/client'
 import { scan } from 'react-scan'
 import App from './App'
@@ -42,6 +45,7 @@ function bootstrap() {
           <Notifications />
           <App />
         </MantineProvider>
+        <ReactQueryDevtools />
       </QueryClientProvider>,
     )
   }
