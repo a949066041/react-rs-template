@@ -1,8 +1,10 @@
-import type { AuthLogin } from '~/api'
-import { useForm } from '@tanstack/react-form'
+import { Button, PasswordInput, TextInput } from '@mantine/core'
+import { useForm } from '@mantine/form'
 import { useMutation } from '@tanstack/react-query'
 import { createFileRoute, redirect } from '@tanstack/react-router'
+import { zodResolver } from 'mantine-form-zod-resolver'
 import { z } from 'zod'
+import { type AuthLogin, authLoginSchema } from '~/api'
 import { useAuthStore } from '~/store'
 
 export const Route = createFileRoute('/login')({
@@ -22,83 +24,47 @@ function RouteComponent() {
   const navigate = Route.useNavigate()
   const search = Route.useSearch()
 
+  const form = useForm<AuthLogin>({
+    validate: zodResolver(authLoginSchema),
+  })
+
   const loginAction = useMutation({
     mutationKey: ['auth', 'login'],
     mutationFn: (value: AuthLogin) => auth.loginUser(value),
   })
 
-  const form = useForm<AuthLogin>({
-    defaultValues: {
-      username: 'admin',
-      password: '123456',
-    },
-    async onSubmit({ value }) {
+  async function handleLoginSubmit(value: AuthLogin) {
+    const { hasErrors } = form.validate()
+    if (!hasErrors) {
       await loginAction.mutateAsync(value)
       await navigate({ to: search.redirect || '/page' })
-    },
-  })
-
+    }
+  }
   return (
     <div>
       <form
-        className=" mt-2 border-t flex flex-col"
-        onSubmit={(e) => {
-          e.preventDefault()
-          e.stopPropagation()
-          form.handleSubmit()
-        }}
+        className=" mt-2  flex flex-col"
+        onSubmit={form.onSubmit(handleLoginSubmit)}
       >
-        <form.Field
-          name="username"
-          children={(field) => {
-            return (
-              <>
-                <label htmlFor={field.name}>username:</label>
-                <input
-                  id={field.name}
-                  name={field.name}
-                  value={field.state.value}
-                  className=" border border-solid"
-                  onBlur={field.handleBlur}
-                  onChange={e => field.handleChange(e.target.value)}
-                />
-              </>
-            )
-          }}
+        <TextInput
+          withAsterisk
+          label="username"
+          placeholder="username"
+          key={form.key('username')}
+          {...form.getInputProps('username')}
         />
 
-        <form.Field
-          name="password"
-          children={(field) => {
-            return (
-              <>
-                <label htmlFor={field.name}>password:</label>
-                <input
-                  className=" border border-solid"
-                  id={field.name}
-                  name={field.name}
-                  value={field.state.value}
-                  onBlur={field.handleBlur}
-                  onChange={e => field.handleChange(e.target.value)}
-                />
-              </>
-            )
-          }}
+        <PasswordInput
+          withAsterisk
+          label="password"
+          placeholder="password"
+          key={form.key('password')}
+          {...form.getInputProps('password')}
         />
 
-        <form.Subscribe
-          selector={state => [state.canSubmit, state.isSubmitting]}
-          children={([canSubmit, isSubmitting]) => (
-            <>
-              <button type="submit" disabled={!canSubmit}>
-                {isSubmitting ? '...' : 'Submit'}
-              </button>
-              <button type="reset" onClick={() => form.reset()}>
-                Reset
-              </button>
-            </>
-          )}
-        />
+        <Button loading={loginAction.isPending} type="submit" mt="sm">
+          Submit
+        </Button>
       </form>
     </div>
   )

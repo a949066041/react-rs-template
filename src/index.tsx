@@ -1,4 +1,5 @@
 import { createTheme, MantineProvider } from '@mantine/core'
+import { Notifications } from '@mantine/notifications'
 import { QueryClientProvider } from '@tanstack/react-query'
 import ReactDOM from 'react-dom/client'
 import { scan } from 'react-scan'
@@ -36,11 +37,12 @@ function bootstrap() {
   if (rootEl) {
     const root = ReactDOM.createRoot(rootEl)
     root.render(
-      <MantineProvider theme={theme}>
-        <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <MantineProvider theme={theme}>
+          <Notifications />
           <App />
-        </QueryClientProvider>
-      </MantineProvider>,
+        </MantineProvider>
+      </QueryClientProvider>,
     )
   }
 }

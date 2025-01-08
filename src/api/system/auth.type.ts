@@ -2,8 +2,8 @@ import { z } from 'zod'
 import { roleSchema, userSchema } from './user.type'
 
 export const authLoginSchema = z.object({
-  username: z.string().min(3).max(20),
-  password: z.string().min(3).max(20),
+  username: z.string().min(3, { message: '请输入最小3位' }).max(20),
+  password: z.string().min(3, { message: '请输入最小3位' }).max(20),
 })
 export type AuthLogin = z.infer<typeof authLoginSchema>
 

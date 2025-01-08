@@ -1,6 +1,6 @@
 import type { AuthLogin, AuthUserRes, IBuildMenu } from '~/api'
-import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
+import { create } from 'zustand/react'
 import { authInfoQueryOption, authLogin, authLogout, menuQueryTreeOptions } from '~/api'
 import { queryClient } from '.'
 import { useCacheStore } from './cache.store'
