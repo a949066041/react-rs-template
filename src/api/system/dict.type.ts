@@ -7,4 +7,4 @@ export const keyLabelVoSchema = z.array(z.object({
 
 export type KeyLabelList = z.infer<typeof keyLabelVoSchema>
 
-export type DictMap<T extends string | boolean | number> = Map<T, string>
+export type DictMap<T extends string | boolean | number = string> = Map<T, string>

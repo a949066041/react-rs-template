@@ -9,10 +9,6 @@ export default defineConfig({
       // eslint-disable-next-line node/prefer-global/process
       isDev: JSON.stringify(process.env.NODE_ENV),
     },
-    alias: {
-      '~': './src',
-      '~~': './',
-    },
   },
   html: {
     title: 'template rs ',

@@ -1,27 +1,31 @@
 import { MultiSelect } from '@mantine/core'
 import { createFileRoute } from '@tanstack/react-router'
-import { useDict } from '~/routes/-components/RenderDict'
+import { DictProvider, useDict } from '~/routes/-components/dict'
 
 export const Route = createFileRoute('/_auth/system/user/')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { data = [], isLoading } = useDict<string>('user_status', { transform: 'string' })
-
-  if (isLoading) {
-    return 'loading...'
-  }
+  const { data = [] } = useDict<boolean>({ transform: 'boolean', dict: 'user_status' })
 
   return (
     <div>
-      Hello "/_auth/system/user/"!
-      <MultiSelect
-        maxValues={1}
-        pointer={false}
-        placeholder="please choose value"
-        data={data}
-      />
+      <DictProvider<string> dict="sex_status">
+        {
+          ({ data }) => (
+            <>
+              <MultiSelect
+                maxValues={1}
+                pointer={false}
+                placeholder="please choose value"
+                data={data}
+              />
+              { JSON.stringify(data) }
+            </>
+          )
+        }
+      </DictProvider>
       { JSON.stringify(data) }
     </div>
   )
