@@ -1,17 +1,3 @@
-import { patchFetch } from './patch'
+export { fetchClient } from './fetch'
 
-export * from './user.api'
-export * from './user.type'
-
-patchFetch([(config) => {
-  const cookie = '123123'
-
-  if (cookie) {
-    config.headers = {
-      ...config.headers,
-      Authorization: cookie,
-    }
-  }
-
-  return config
-}])
+export * from './module'

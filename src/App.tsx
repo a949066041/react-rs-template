@@ -1,6 +1,7 @@
 import { createRouter, RouterProvider } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
-import { queryClient, useAuthStore } from './store'
+import { queryClient } from './store'
+import { useCacheStore } from './store/cache.store'
 
 const router = createRouter({ routeTree, context: { queryClient, auth: undefined } })
 
@@ -11,7 +12,7 @@ declare module '@tanstack/react-router' {
 }
 
 export default function App() {
-  const { userInfo } = useAuthStore()
+  const { userToken } = useCacheStore()
 
-  return <RouterProvider router={router} context={{ auth: userInfo, queryClient }} />
+  return <RouterProvider router={router} context={{ auth: userToken, queryClient }} />
 }

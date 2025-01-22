@@ -1,31 +1,49 @@
+import type { ILoginUserParams, LoginRes } from '~/api'
+import { omit } from 'lodash-es'
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
+import { loginUser } from '~/api'
+import { useCacheStore } from './cache.store'
 
-export interface IUserInfo {
-  username: string
-}
-
-interface State {
-  userInfo?: IUserInfo
+interface States {
+  userInfo?: Omit<LoginRes, 'accessToken'>
 }
 
 interface Actions {
-  loginUser: (username: IUserInfo['username']) => Promise<void>
+  loginUser: (params: ILoginUserParams) => Promise<void>
   logoutUser: () => void
+  setUser: (info: Required<States>['userInfo']) => void
 }
 
-export const useAuthStore = create<State & Actions>()(
-  immer(set => ({
+function initAuthStore() {
+  return {
     userInfo: undefined,
-    loginUser: async (username) => {
-      await new Promise(r => setTimeout(r, 2000))
+  } as States
+}
+
+export const useAuthStore = create<States & Actions>()(
+  immer(set => ({
+    ...initAuthStore(),
+    loginUser: async (params: ILoginUserParams) => {
+      const res = await loginUser(params)
+      const cacheStore = useCacheStore.getState()
       set((state) => {
-        state.userInfo = { username }
+        state.userInfo = omit(res, ['accessToken'])
+        cacheStore.setToken(res.accessToken)
       })
     },
-    logoutUser: () =>
+    logoutUser: () => {
+      const cacheStore = useCacheStore.getState()
       set((state) => {
-        state.userInfo = undefined
-      }),
+        const initStore = initAuthStore()
+        state.userInfo = initStore.userInfo
+        cacheStore.removeToken()
+      })
+    },
+    setUser: async (info: Required<States>['userInfo']) => {
+      set((state) => {
+        state.userInfo = info
+      })
+    },
   })),
 )

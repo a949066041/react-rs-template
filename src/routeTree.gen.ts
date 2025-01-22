@@ -18,6 +18,7 @@ import { Route as NestingImport } from './routes/_nesting'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as PageImport } from './routes/$page'
 import { Route as IndexImport } from './routes/index'
+import { Route as TableIndexImport } from './routes/table/index'
 import { Route as AboutIndexImport } from './routes/about/index'
 import { Route as UserPagerImport } from './routes/user/pager'
 import { Route as UserIdImport } from './routes/user/$id'
@@ -87,6 +88,12 @@ const UserIndexLazyRoute = UserIndexLazyImport.update({
   path: '/',
   getParentRoute: () => UserLazyRoute,
 } as any).lazy(() => import('./routes/user/index.lazy').then((d) => d.Route))
+
+const TableIndexRoute = TableIndexImport.update({
+  id: '/table/',
+  path: '/table/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AboutIndexRoute = AboutIndexImport.update({
   id: '/about/',
@@ -293,6 +300,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutIndexImport
       parentRoute: typeof rootRoute
     }
+    '/table/': {
+      id: '/table/'
+      path: '/table'
+      fullPath: '/table'
+      preLoaderRoute: typeof TableIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/user/': {
       id: '/user/'
       path: '/'
@@ -415,6 +429,7 @@ export interface FileRoutesByFullPath {
   '/user/$id': typeof UserIdRoute
   '/user/pager': typeof UserPagerRoute
   '/about': typeof AboutIndexRoute
+  '/table': typeof TableIndexRoute
   '/user/': typeof UserIndexLazyRoute
   '/test2': typeof NestingLayoutTest2Route
   '/about/$value/create': typeof AboutValueCreateRoute
@@ -438,6 +453,7 @@ export interface FileRoutesByTo {
   '/user/$id': typeof UserIdRoute
   '/user/pager': typeof UserPagerRoute
   '/about': typeof AboutIndexRoute
+  '/table': typeof TableIndexRoute
   '/user': typeof UserIndexLazyRoute
   '/test2': typeof NestingLayoutTest2Route
   '/about/$value/create': typeof AboutValueCreateRoute
@@ -465,6 +481,7 @@ export interface FileRoutesById {
   '/user/$id': typeof UserIdRoute
   '/user/pager': typeof UserPagerRoute
   '/about/': typeof AboutIndexRoute
+  '/table/': typeof TableIndexRoute
   '/user/': typeof UserIndexLazyRoute
   '/_nesting/_layout/test2': typeof NestingLayoutTest2Route
   '/about/$value/create': typeof AboutValueCreateRoute
@@ -491,6 +508,7 @@ export interface FileRouteTypes {
     | '/user/$id'
     | '/user/pager'
     | '/about'
+    | '/table'
     | '/user/'
     | '/test2'
     | '/about/$value/create'
@@ -513,6 +531,7 @@ export interface FileRouteTypes {
     | '/user/$id'
     | '/user/pager'
     | '/about'
+    | '/table'
     | '/user'
     | '/test2'
     | '/about/$value/create'
@@ -538,6 +557,7 @@ export interface FileRouteTypes {
     | '/user/$id'
     | '/user/pager'
     | '/about/'
+    | '/table/'
     | '/user/'
     | '/_nesting/_layout/test2'
     | '/about/$value/create'
@@ -560,6 +580,7 @@ export interface RootRouteChildren {
   groupGroup3Route: typeof groupGroup3Route
   AboutIdRoute: typeof AboutIdRoute
   AboutIndexRoute: typeof AboutIndexRoute
+  TableIndexRoute: typeof TableIndexRoute
   AboutValueCreateRoute: typeof AboutValueCreateRoute
   AboutNameNameRoute: typeof AboutNameNameRoute
   AboutValueIndexRoute: typeof AboutValueIndexRoute
@@ -578,6 +599,7 @@ const rootRouteChildren: RootRouteChildren = {
   groupGroup3Route: groupGroup3Route,
   AboutIdRoute: AboutIdRoute,
   AboutIndexRoute: AboutIndexRoute,
+  TableIndexRoute: TableIndexRoute,
   AboutValueCreateRoute: AboutValueCreateRoute,
   AboutNameNameRoute: AboutNameNameRoute,
   AboutValueIndexRoute: AboutValueIndexRoute,
@@ -605,6 +627,7 @@ export const routeTree = rootRoute
         "/(group)/group3",
         "/about/$id",
         "/about/",
+        "/table/",
         "/about/$value/create",
         "/about/name/$name",
         "/about/$value/",
@@ -679,6 +702,9 @@ export const routeTree = rootRoute
     },
     "/about/": {
       "filePath": "about/index.tsx"
+    },
+    "/table/": {
+      "filePath": "table/index.tsx"
     },
     "/user/": {
       "filePath": "user/index.lazy.tsx",

@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
-interface State {
+interface States {
   count: number
 }
 
@@ -10,7 +10,7 @@ interface Actions {
   decrement: (qty: number) => void
 }
 
-export const useCountStore = create<State & Actions>()(
+export const useCountStore = create<States & Actions>()(
   immer(set => ({
     count: 0,
     increment: (qty: number) =>

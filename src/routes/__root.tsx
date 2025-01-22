@@ -1,5 +1,4 @@
 import type { QueryClient } from '@tanstack/react-query'
-import type { IUserInfo } from '~/store'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { createRootRouteWithContext, Link, Outlet } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
@@ -8,6 +7,7 @@ import { ThemeProvider, Themes, useTheme } from '~/components'
 
 const routes = [
   { path: '/', title: '首页', icon: 'icon-[line-md--home]' },
+  { path: '/table', title: 'react table', icon: 'icon-[hugeicons--table]' },
   { path: '/store', title: 'zustand 缓存', icon: 'icon-[octicon--cache-24]' },
   { path: '/user', title: 'react query', icon: 'icon-[logos--react-query]' },
   { path: '/layout-test', title: '嵌套路由', icon: 'icon-[ant-design--layout-outlined]' },
@@ -29,7 +29,7 @@ function ThemeMode() {
 
 interface MyRouterContext {
   queryClient: QueryClient
-  auth?: IUserInfo
+  auth?: string
 }
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({

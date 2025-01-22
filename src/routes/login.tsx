@@ -9,7 +9,8 @@ export const Route = createFileRoute('/login')({
   }),
   component: RouteComponent,
   beforeLoad({ context: { auth }, search }) {
-    if (auth && auth.username) {
+    // 校验用户是否登录跳转
+    if (auth) {
       throw redirect({ to: search.redirect || '/page' })
     }
   },
@@ -23,15 +24,15 @@ function RouteComponent() {
 
   const action = useMutation({
     mutationKey: ['login'],
-    mutationFn: (username: string) => auth.loginUser(username),
+    mutationFn: () => auth.loginUser({ username: 'emilys', password: 'emilyspass' }),
   })
 
   async function handleSubmitLogin(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault()
-    const data = new FormData(evt.currentTarget)
-    const username = data.get('username') as string
+    // const data = new FormData(evt.currentTarget)
+    // const username = data.get('username') as string
 
-    await action.mutateAsync(username)
+    await action.mutateAsync()
     await router.invalidate()
     await navigate({ to: search.redirect || '/page' })
   }
@@ -41,7 +42,7 @@ function RouteComponent() {
       this is login page
       <form className=" mt-2 border-t" onSubmit={handleSubmitLogin}>
         <label htmlFor="">username： </label>
-        <input name="username" className=" border" required type="text" />
+        <input name="username" className=" border" type="text" />
         <button className=" px-2 border-red-400 border ml-2" type="submit" disabled={action.isPending}>
           {
             action.isPending ? 'login...' : 'login'
