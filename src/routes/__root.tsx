@@ -1,6 +1,6 @@
 import type { QueryClient } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { createRootRouteWithContext, Link, Outlet } from '@tanstack/react-router'
+import { createRootRouteWithContext, Link, Outlet, useRouterState } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import classix from 'classix'
 import { ThemeProvider, Themes, useTheme } from '~/components'
@@ -33,7 +33,13 @@ interface MyRouterContext {
 }
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
-  component: () => (
+  component: RootComponent,
+})
+
+function RootComponent() {
+  const state = useRouterState()
+
+  return (
     <ThemeProvider>
       <div className=" flex h-screen dark:bg-black/75 bg-white/85 dark:text-white">
         <ul className=" w-[200px] flex-none border-r-2 border-dashed border-blue-300 h-full">
@@ -54,11 +60,12 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
               <ThemeMode />
             </span>
           </header>
+          { state.isLoading && 'loading...' }
           <Outlet />
         </div>
         <TanStackRouterDevtools />
         <ReactQueryDevtools />
       </div>
     </ThemeProvider>
-  ),
-})
+  )
+}

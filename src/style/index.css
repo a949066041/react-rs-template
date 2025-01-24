@@ -1,4 +1,5 @@
 @import "tailwindcss";
 
+@plugin "@iconify/tailwind4";
+
 @variant dark (&:where(.dark, .dark *));
-@plugin "./plugins";

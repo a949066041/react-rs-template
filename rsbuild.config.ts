@@ -10,7 +10,8 @@ export default defineConfig({
     },
   },
   html: {
-    title: 'template rs ',
+    favicon: './src/assets/icon/app-icon.png',
+    title: 'template rs',
   },
   tools: {
     rspack: {
