@@ -18,7 +18,7 @@ function RouteComponent() {
   return (
     <div>
       Hello "/_auth/page"
-      { userInfo?.username }
+      { userInfo?.gender }
       <button type="button" onClick={logoutAction}>logout</button>
     </div>
   )

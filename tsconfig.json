@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "lib": ["DOM", "ESNext"],
     "useDefineForClassFields": true,
     "baseUrl": ".",
@@ -17,5 +17,5 @@
     "isolatedModules": true,
     "skipLibCheck": true
   },
-  "include": ["src"]
+  "include": ["src", "rsbuild.config.ts"]
 }

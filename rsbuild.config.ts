@@ -1,6 +1,9 @@
 import { defineConfig } from '@rsbuild/core'
 import { pluginReact } from '@rsbuild/plugin-react'
 import { TanStackRouterRspack } from '@tanstack/router-plugin/rspack'
+import { version } from './package.json' with { type: 'json' }
+
+const APP_TITLE = 'template rs'
 
 export default defineConfig({
   plugins: [pluginReact()],
@@ -8,10 +11,14 @@ export default defineConfig({
     alias: {
       '~': './src',
     },
+    define: {
+      APP_TITLE: JSON.stringify(APP_TITLE),
+      APP_VERSION: JSON.stringify(version),
+    },
   },
   html: {
     favicon: './src/assets/icon/app-icon.png',
-    title: 'template rs',
+    title: APP_TITLE,
   },
   tools: {
     rspack: {

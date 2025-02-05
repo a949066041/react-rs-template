@@ -4,18 +4,7 @@ import { createRootRouteWithContext, Link, Outlet, useRouterState } from '@tanst
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import classix from 'classix'
 import { ThemeProvider, Themes, useTheme } from '~/components'
-
-const routes = [
-  { path: '/', title: '首页', icon: 'icon-[line-md--home]' },
-  { path: '/table', title: 'react table', icon: 'icon-[hugeicons--table]' },
-  { path: '/store', title: 'zustand 缓存', icon: 'icon-[octicon--cache-24]' },
-  { path: '/user', title: 'react query', icon: 'icon-[logos--react-query]' },
-  { path: '/layout-test', title: '嵌套路由', icon: 'icon-[ant-design--layout-outlined]' },
-  { path: '/group2', title: '分组', icon: 'icon-[icons8--group]' },
-  { path: '/page', title: '用户鉴权', icon: 'icon-[arcticons--microsoft-authenticator]' },
-  { path: '/404', title: 'not found page', icon: 'icon-[tabler--error-404]' },
-  { path: '/about', title: '关于', icon: 'icon-[ix--about]' },
-]
+import appConfig from '~/utils/app.config'
 
 function ThemeMode() {
   const { themeName, set } = useTheme()
@@ -43,8 +32,11 @@ function RootComponent() {
     <ThemeProvider>
       <div className=" flex h-screen dark:bg-black/75 bg-white/85 dark:text-white">
         <ul className=" w-[200px] flex-none border-r-2 border-dashed border-blue-300 h-full">
+          <span className=" fixed right-1.5 top-1.5 bg-amber-600 px-2 rounded-4xl z-10">
+            { import.meta.env.DEV && appConfig.appVersion }
+          </span>
           {
-            routes.map(item => (
+            appConfig.routers.map(item => (
               <li key={item.path} className=" h-10 leading-10 p-2 ">
                 <Link to={item.path} className=" flex items-center" activeProps={{ className: ' font-bold text-red-400' }}>
                   <i className={classix(item.icon, ' mr-2')} />
