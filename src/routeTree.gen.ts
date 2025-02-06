@@ -14,6 +14,7 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as LoginImport } from './routes/login'
+import { Route as IconImport } from './routes/icon'
 import { Route as NestingImport } from './routes/_nesting'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as PageImport } from './routes/$page'
@@ -58,6 +59,12 @@ const StoreLazyRoute = StoreLazyImport.update({
 const LoginRoute = LoginImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const IconRoute = IconImport.update({
+  id: '/icon',
+  path: '/icon',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -214,6 +221,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof NestingImport
+      parentRoute: typeof rootRoute
+    }
+    '/icon': {
+      id: '/icon'
+      path: '/icon'
+      fullPath: '/icon'
+      preLoaderRoute: typeof IconImport
       parentRoute: typeof rootRoute
     }
     '/login': {
@@ -418,6 +432,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$page': typeof PageRoute
   '': typeof NestingLayoutRouteWithChildren
+  '/icon': typeof IconRoute
   '/login': typeof LoginRoute
   '/store': typeof StoreLazyRoute
   '/user': typeof UserLazyRouteWithChildren
@@ -443,6 +458,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$page': typeof PageRoute
   '': typeof NestingLayoutRouteWithChildren
+  '/icon': typeof IconRoute
   '/login': typeof LoginRoute
   '/store': typeof StoreLazyRoute
   '/group2': typeof groupGroup2Route
@@ -469,6 +485,7 @@ export interface FileRoutesById {
   '/$page': typeof PageRoute
   '/_auth': typeof AuthRouteWithChildren
   '/_nesting': typeof NestingRouteWithChildren
+  '/icon': typeof IconRoute
   '/login': typeof LoginRoute
   '/store': typeof StoreLazyRoute
   '/user': typeof UserLazyRouteWithChildren
@@ -497,6 +514,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$page'
     | ''
+    | '/icon'
     | '/login'
     | '/store'
     | '/user'
@@ -521,6 +539,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$page'
     | ''
+    | '/icon'
     | '/login'
     | '/store'
     | '/group2'
@@ -545,6 +564,7 @@ export interface FileRouteTypes {
     | '/$page'
     | '/_auth'
     | '/_nesting'
+    | '/icon'
     | '/login'
     | '/store'
     | '/user'
@@ -573,6 +593,7 @@ export interface RootRouteChildren {
   PageRoute: typeof PageRoute
   AuthRoute: typeof AuthRouteWithChildren
   NestingRoute: typeof NestingRouteWithChildren
+  IconRoute: typeof IconRoute
   LoginRoute: typeof LoginRoute
   StoreLazyRoute: typeof StoreLazyRoute
   UserLazyRoute: typeof UserLazyRouteWithChildren
@@ -592,6 +613,7 @@ const rootRouteChildren: RootRouteChildren = {
   PageRoute: PageRoute,
   AuthRoute: AuthRouteWithChildren,
   NestingRoute: NestingRouteWithChildren,
+  IconRoute: IconRoute,
   LoginRoute: LoginRoute,
   StoreLazyRoute: StoreLazyRoute,
   UserLazyRoute: UserLazyRouteWithChildren,
@@ -620,6 +642,7 @@ export const routeTree = rootRoute
         "/$page",
         "/_auth",
         "/_nesting",
+        "/icon",
         "/login",
         "/store",
         "/user",
@@ -652,6 +675,9 @@ export const routeTree = rootRoute
         "/_nesting/_layout",
         "/_nesting/layout-test"
       ]
+    },
+    "/icon": {
+      "filePath": "icon.tsx"
     },
     "/login": {
       "filePath": "login.tsx"

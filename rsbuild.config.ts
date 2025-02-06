@@ -8,9 +8,6 @@ const APP_TITLE = 'template rs'
 export default defineConfig({
   plugins: [pluginReact()],
   source: {
-    alias: {
-      '~': './src',
-    },
     define: {
       APP_TITLE: JSON.stringify(APP_TITLE),
       APP_VERSION: JSON.stringify(version),

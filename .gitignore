@@ -10,3 +10,6 @@ dist/
 # IDE
 !.vscode/extensions.json
 .idea
+
+# assets
+custom.json

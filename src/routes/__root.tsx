@@ -32,7 +32,8 @@ function RootComponent() {
     <ThemeProvider>
       <div className=" flex h-screen dark:bg-black/75 bg-white/85 dark:text-white">
         <ul className=" w-[200px] flex-none border-r-2 border-dashed border-blue-300 h-full">
-          <span className=" fixed right-1.5 top-1.5 bg-amber-600 px-2 rounded-4xl z-10">
+          <span className=" fixed right-1.5 top-1.5 bg-amber-600 px-2 rounded-4xl z-10 cursor-move">
+            <i className=" icon-[custom--anq]"></i>
             { import.meta.env.DEV && appConfig.appVersion }
           </span>
           {

@@ -1,14 +1,13 @@
 import { createFileRoute } from '@tanstack/react-router'
-import * as React from 'react'
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute('/icon')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
   return (
-    <div className=" btn">
-      home page
+    <div>
+      Hello "/icon"!
     </div>
   )
 }

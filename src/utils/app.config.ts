@@ -20,6 +20,7 @@ export default {
     { path: '/layout-test', title: '嵌套路由', icon: 'icon-[ant-design--layout-outlined]' },
     { path: '/group2', title: '分组', icon: 'icon-[icons8--group]' },
     { path: '/page', title: '用户鉴权', icon: 'icon-[arcticons--microsoft-authenticator]' },
+    { path: '/icon', title: '自定义图标', icon: 'icon-[tabler--error-404]' },
     { path: '/404', title: 'not found page', icon: 'icon-[tabler--error-404]' },
     { path: '/about', title: '关于', icon: 'icon-[ix--about]' },
   ],
