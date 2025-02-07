@@ -1,6 +1,5 @@
-import { patchFetch } from './api/fetch/patch'
-import { useAuthStore } from './store'
-import { useCacheStore } from './store/cache.store'
+import { patchFetch } from '~/api/fetch/patch'
+import { useAuthStore, useCacheStore } from '~/store'
 
 function fetchAuthIntercept(req: RequestInit) {
   const { userToken } = useCacheStore.getState()
@@ -27,8 +26,6 @@ async function fetchResponseIntercepet(res: Response) {
   return res
 }
 
-function setupFetch() {
+export function setupFetch() {
   patchFetch([fetchAuthIntercept], fetchResponseIntercepet, 'https://dummyjson.com')
 }
-
-setupFetch()
