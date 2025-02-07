@@ -27,3 +27,15 @@ Preview the production build locally:
 ```bash
 pnpm preview
 ```
+
+---
+TODO
+- [x] tailwindcss
+- [x] rsbuild
+- [x] zustand
+- [x] react-query
+- [x] eslint
+- [x] typescript
+- [x] custom icon set
+- [] i18n
+---

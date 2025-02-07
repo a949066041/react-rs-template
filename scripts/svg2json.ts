@@ -16,6 +16,7 @@ import {
     prefix,
   })
 
+  console.log(`building ${prefix} icon ${iconSet.count()} icons...`)
   // Validate, clean up, fix palette and optimise
   iconSet.forEach((name, type) => {
     if (type !== 'icon') {
@@ -60,6 +61,8 @@ import {
   // Export as IconifyJSON
   const exported = `${JSON.stringify(iconSet.export(), null, '\t')}\n`
 
+  const buildDist = `src/assets/${iconSet.prefix}.json`
   // Save to file
-  await fs.writeFile(`src/assets/${iconSet.prefix}.json`, exported, 'utf8')
+  await fs.writeFile(buildDist, exported, 'utf8')
+  console.log(`build ${prefix} icon success to ${buildDist}!`)
 })()
