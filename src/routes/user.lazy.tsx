@@ -25,7 +25,7 @@ function RouteComponent() {
             <Link
               to="/user/$id"
               className=" flex items-center"
-              params={{ id: item.id }}
+              params={{ id: `${item.id}` }}
             >
               {`${item.firstName} ${item.lastName}`}
               <span className="icon-[maki--arrow] ml-2"></span>

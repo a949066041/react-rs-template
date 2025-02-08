@@ -3,7 +3,6 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { createRootRouteWithContext, Link, Outlet, useRouterState } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import classix from 'classix'
-import { useTranslation } from 'react-i18next'
 import { ThemeProvider, Themes, useTheme } from '~/components'
 import appConfig from '~/utils/app.config'
 
