@@ -37,5 +37,5 @@ TODO
 - [x] eslint
 - [x] typescript
 - [x] custom icon set
-- [ ] i18n
+- [x] i18n
 ---
