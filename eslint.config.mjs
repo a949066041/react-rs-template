@@ -1,12 +1,9 @@
 import antfu from '@antfu/eslint-config'
-import unusedImports from 'eslint-plugin-unused-imports'
 
 export default antfu({
   react: true,
 
   // Enable stylistic formatting rules
-  // stylistic: true,
-
   // Or customize the stylistic rules
   stylistic: {
     indent: 2, // 4, or 'tab'
@@ -20,18 +17,14 @@ export default antfu({
 
   // `.eslintignore` is no longer supported in Flat config, use `ignores` instead
   ignores: [
-    '**/fixtures',
     'custom.json',
-    'src/routeTree.gen.ts',
     // ...globs
   ],
 }, {
-  plugins: {
-    'unused-imports': unusedImports,
-  },
   rules: {
-    'no-unused-vars': 'off',
-    'unused-imports/no-unused-imports': 'warn',
+    'node/prefer-global/process': 'off',
+    'no-unused-vars': 'off', // or "@typescript-eslint/no-unused-vars": "off",
+    'unused-imports/no-unused-imports': 'error',
     'unused-imports/no-unused-vars': [
       'warn',
       {

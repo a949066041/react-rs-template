@@ -21,6 +21,7 @@ async function fetchResponseIntercepet(res: Response) {
   }
 
   if (res.status !== 200) {
+    useAuthStore.getState().logoutUser()
     throw new Error('error request')
   }
   return res

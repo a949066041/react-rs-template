@@ -8,7 +8,7 @@ import './style/index.css'
 
 if (typeof window !== 'undefined') {
   scan({
-    enabled: false,
+    enabled: import.meta.env.DEV,
     log: false, // logs render info to console (default: false)
   })
 }

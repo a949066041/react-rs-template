@@ -17,6 +17,9 @@ export default defineConfig({
     favicon: './src/assets/icon/app-icon.png',
     title: APP_TITLE,
   },
+  performance: {
+    buildCache: process.env.NODE_ENV === 'development',
+  },
   tools: {
     rspack: {
       plugins: [TanStackRouterRspack()],

@@ -1,3 +1,4 @@
+/* eslint-disable eslint-comments/no-unlimited-disable */
 /* eslint-disable */
 
 // @ts-nocheck
@@ -26,6 +27,7 @@ import { Route as UserIdImport } from './routes/user/$id'
 import { Route as AboutIdImport } from './routes/about/$id'
 import { Route as NestingLayoutTestImport } from './routes/_nesting/layout-test'
 import { Route as NestingLayoutImport } from './routes/_nesting/_layout'
+import { Route as AuthPage2Import } from './routes/_auth/page2'
 import { Route as AuthPageImport } from './routes/_auth/page'
 import { Route as groupGroup3Import } from './routes/(group)/group3'
 import { Route as groupGroup2Import } from './routes/(group)/group2'
@@ -135,6 +137,12 @@ const NestingLayoutTestRoute = NestingLayoutTestImport.update({
 const NestingLayoutRoute = NestingLayoutImport.update({
   id: '/_layout',
   getParentRoute: () => NestingRoute,
+} as any)
+
+const AuthPage2Route = AuthPage2Import.update({
+  id: '/page2',
+  path: '/page2',
+  getParentRoute: () => AuthRoute,
 } as any)
 
 const AuthPageRoute = AuthPageImport.update({
@@ -272,6 +280,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthPageImport
       parentRoute: typeof AuthImport
     }
+    '/_auth/page2': {
+      id: '/_auth/page2'
+      path: '/page2'
+      fullPath: '/page2'
+      preLoaderRoute: typeof AuthPage2Import
+      parentRoute: typeof AuthImport
+    }
     '/_nesting/_layout': {
       id: '/_nesting/_layout'
       path: ''
@@ -377,10 +392,12 @@ declare module '@tanstack/react-router' {
 
 interface AuthRouteChildren {
   AuthPageRoute: typeof AuthPageRoute
+  AuthPage2Route: typeof AuthPage2Route
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthPageRoute: AuthPageRoute,
+  AuthPage2Route: AuthPage2Route,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
@@ -439,6 +456,7 @@ export interface FileRoutesByFullPath {
   '/group2': typeof groupGroup2Route
   '/group3': typeof groupGroup3Route
   '/page': typeof AuthPageRoute
+  '/page2': typeof AuthPage2Route
   '/layout-test': typeof NestingLayoutTestRoute
   '/about/$id': typeof AboutIdRoute
   '/user/$id': typeof UserIdRoute
@@ -464,6 +482,7 @@ export interface FileRoutesByTo {
   '/group2': typeof groupGroup2Route
   '/group3': typeof groupGroup3Route
   '/page': typeof AuthPageRoute
+  '/page2': typeof AuthPage2Route
   '/layout-test': typeof NestingLayoutTestRoute
   '/about/$id': typeof AboutIdRoute
   '/user/$id': typeof UserIdRoute
@@ -492,6 +511,7 @@ export interface FileRoutesById {
   '/(group)/group2': typeof groupGroup2Route
   '/(group)/group3': typeof groupGroup3Route
   '/_auth/page': typeof AuthPageRoute
+  '/_auth/page2': typeof AuthPage2Route
   '/_nesting/_layout': typeof NestingLayoutRouteWithChildren
   '/_nesting/layout-test': typeof NestingLayoutTestRoute
   '/about/$id': typeof AboutIdRoute
@@ -521,6 +541,7 @@ export interface FileRouteTypes {
     | '/group2'
     | '/group3'
     | '/page'
+    | '/page2'
     | '/layout-test'
     | '/about/$id'
     | '/user/$id'
@@ -545,6 +566,7 @@ export interface FileRouteTypes {
     | '/group2'
     | '/group3'
     | '/page'
+    | '/page2'
     | '/layout-test'
     | '/about/$id'
     | '/user/$id'
@@ -571,6 +593,7 @@ export interface FileRouteTypes {
     | '/(group)/group2'
     | '/(group)/group3'
     | '/_auth/page'
+    | '/_auth/page2'
     | '/_nesting/_layout'
     | '/_nesting/layout-test'
     | '/about/$id'
@@ -666,7 +689,8 @@ export const routeTree = rootRoute
     "/_auth": {
       "filePath": "_auth.tsx",
       "children": [
-        "/_auth/page"
+        "/_auth/page",
+        "/_auth/page2"
       ]
     },
     "/_nesting": {
@@ -701,6 +725,10 @@ export const routeTree = rootRoute
     },
     "/_auth/page": {
       "filePath": "_auth/page.tsx",
+      "parent": "/_auth"
+    },
+    "/_auth/page2": {
+      "filePath": "_auth/page2.tsx",
       "parent": "/_auth"
     },
     "/_nesting/_layout": {

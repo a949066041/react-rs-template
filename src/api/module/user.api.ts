@@ -1,6 +1,7 @@
 import type { ILoginUserParams, IUserEntity, IUserList, LoginRes } from './user.type'
 import { infiniteQueryOptions, queryOptions } from '@tanstack/react-query'
 import { fetchClient } from '~/api/fetch'
+import { delay } from '~/utils'
 
 const baseUrl = '/users'
 /**
@@ -23,7 +24,8 @@ export function loginUser(params: ILoginUserParams) {
   return fetchClient.post<LoginRes>(`${baseUrl}/login`, params)
 }
 
-export function getUserMe() {
+export async function getUserMe() {
+  await delay(2000)
   return fetchClient.get<LoginRes>(`${baseUrl}/me`)
 }
 

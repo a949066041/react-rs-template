@@ -10,7 +10,7 @@ export const Route = createLazyFileRoute('/user')({
 })
 
 function RouteComponent() {
-  const { data, refetch, isLoading, isFetching } = useSuspenseQuery(userQueryListOptions)
+  const { data, isLoading, isFetching } = useSuspenseQuery(userQueryListOptions)
 
   if (isLoading || isFetching) {
     return <div>loading...</div>
