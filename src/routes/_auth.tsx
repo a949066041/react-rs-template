@@ -24,7 +24,9 @@ export const Route = createFileRoute('/_auth')({
 function RouteComponent() {
   return (
     <>
-      <Link to="/page2">to auth page2</Link>
+      <Link to="/page2">
+        to auth page
+      </Link>
       <Outlet />
     </>
   )

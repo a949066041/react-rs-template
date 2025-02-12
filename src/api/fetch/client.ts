@@ -41,7 +41,7 @@ export const fetchClient = {
     if (import.meta.env.DEV && schema && response) {
       const res = schema.safeParse(response)
       if (!res.success) {
-        throw new Error('post action res value error', res.data)
+        throw new Error(`post action res value error${res.data}`)
       }
     }
 

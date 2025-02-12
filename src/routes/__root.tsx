@@ -1,9 +1,11 @@
 import type { QueryClient } from '@tanstack/react-query'
 import type { LoginRes } from '~/api'
+import { useIsFetching } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { createRootRouteWithContext, Link, Outlet, useRouterState } from '@tanstack/react-router'
+import { createRootRouteWithContext, Link, Outlet } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import classix from 'classix'
+import { userMeQueryOptions } from '~/api'
 import { ThemeProvider, Themes, useTheme } from '~/components'
 import appConfig from '~/utils/app.config'
 
@@ -28,7 +30,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 })
 
 function RootComponent() {
-  const state = useRouterState()
+  const loading = useIsFetching({ queryKey: userMeQueryOptions().queryKey })
 
   return (
     <ThemeProvider>
@@ -59,7 +61,7 @@ function RootComponent() {
               <ThemeMode />
             </span>
           </header>
-          { state.isLoading && 'loading...' }
+          { loading > 0 && 'loading...' }
           <Outlet />
         </div>
         <TanStackRouterDevtools />
