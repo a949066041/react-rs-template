@@ -15,8 +15,8 @@
   "dependencies": {
     "@tailwindcss/postcss": "^4.0.6",
     "@tanstack/react-query": "^5.66.0",
-    "@tanstack/react-router": "^1.102.1",
-    "@tanstack/react-table": "^8.20.6",
+    "@tanstack/react-router": "^1.102.5",
+    "@tanstack/react-table": "^8.21.2",
     "classix": "^2.2.1",
     "dayjs": "^1.11.13",
     "esno": "^4.8.0",
@@ -29,7 +29,7 @@
     "react-intersection-observer": "^9.15.1",
     "react-scan": "^0.1.3",
     "usehooks-ts": "^3.1.1",
-    "zod": "^3.24.1",
+    "zod": "^3.24.2",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
@@ -38,21 +38,21 @@
     "@iconify/json": "^2.2.305",
     "@iconify/tailwind": "^1.2.0",
     "@iconify/tools": "^4.1.1",
-    "@rsbuild/core": "^1.2.5",
+    "@rsbuild/core": "^1.2.7",
     "@rsbuild/plugin-react": "^1.1.0",
     "@rsdoctor/rspack-plugin": "^0.4.13",
     "@tanstack/react-query-devtools": "^5.66.0",
-    "@tanstack/router-devtools": "^1.102.1",
-    "@tanstack/router-plugin": "^1.102.2",
+    "@tanstack/router-devtools": "^1.102.5",
+    "@tanstack/router-plugin": "^1.102.6",
     "@types/lodash-es": "^4.17.12",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
-    "eslint": "^9.20.0",
+    "eslint": "^9.20.1",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "eslint-plugin-unused-imports": "^4.1.4",
     "tailwindcss": "^4.0.6",
-    "taze": "^18.4.0",
+    "taze": "^18.5.0",
     "typescript": "^5.7.3"
   }
 }
