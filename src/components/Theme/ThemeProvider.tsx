@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useDarkMode } from 'usehooks-ts'
 import { ThemeContext, Themes } from '.'
 
@@ -25,13 +25,17 @@ export function ThemeProvider(props: ThemeProviderProps) {
     }
   }, [isDarkMode, disabled])
 
+  const themeValue = useMemo(() => {
+    return {
+      toggle,
+      set,
+      themeName: isDarkMode ? Themes.DARK : Themes.LIGHT,
+    }
+  }, [toggle, set, isDarkMode])
+
   return (
     <ThemeContext
-      value={{
-        toggle,
-        set,
-        themeName: isDarkMode ? Themes.DARK : Themes.LIGHT,
-      }}
+      value={themeValue}
     >
       {children}
     </ThemeContext>
