@@ -1,6 +1,7 @@
 import { defineConfig } from '@rsbuild/core'
+
 import { pluginReact } from '@rsbuild/plugin-react'
-import { TanStackRouterRspack } from '@tanstack/router-plugin/rspack'
+import { tanstackRouter } from '@tanstack/router-plugin/rspack'
 import { version } from './package.json' with { type: 'json' }
 
 const APP_TITLE = 'template rs'
@@ -22,7 +23,12 @@ export default defineConfig({
   },
   tools: {
     rspack: {
-      plugins: [TanStackRouterRspack()],
+      plugins: [
+        tanstackRouter({
+          target: 'react',
+          autoCodeSplitting: true,
+        }),
+      ],
     },
   },
 })
