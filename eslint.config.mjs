@@ -30,5 +30,6 @@ export default antfu({
         argsIgnorePattern: '^_',
       },
     ],
+    'prefer-promise-reject-errors': 'off',
   },
 })
