@@ -1,4 +1,5 @@
 import { QueryClientProvider } from '@tanstack/react-query'
+import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import { scan } from 'react-scan'
 import App from './App'
@@ -18,9 +19,11 @@ function bootstrap() {
   if (rootEl) {
     const root = ReactDOM.createRoot(rootEl)
     root.render(
-      <QueryClientProvider client={queryClient}>
-        <App />
-      </QueryClientProvider>,
+      <StrictMode>
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
+      </StrictMode>,
     )
   }
 }

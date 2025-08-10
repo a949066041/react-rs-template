@@ -1,9 +1,10 @@
 import type { QueryClient } from '@tanstack/react-query'
 import type { LoginRes } from '~/api'
+import { TanstackDevtools } from '@tanstack/react-devtools'
 import { useIsFetching } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
 import { createRootRouteWithContext, Link, Outlet } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { TanStackRouterDevtoolsPanel } from '@tanstack/router-devtools'
 import classix from 'classix'
 import { userMeQueryOptions } from '~/api'
 import { ThemeProvider, Themes, useTheme } from '~/components'
@@ -64,9 +65,21 @@ function RootComponent() {
           { loading > 0 && 'loading...' }
           <Outlet />
         </div>
-        <TanStackRouterDevtools />
-        <ReactQueryDevtools />
       </div>
+
+      <TanstackDevtools
+        plugins={[
+          {
+            name: 'Tanstack Query',
+            render: <ReactQueryDevtoolsPanel />,
+          },
+          {
+            name: 'Tanstack Router',
+            render: <TanStackRouterDevtoolsPanel />,
+          },
+        ]}
+      >
+      </TanstackDevtools>
     </ThemeProvider>
   )
 }
