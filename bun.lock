@@ -28,7 +28,7 @@
       "devDependencies": {
         "@antfu/eslint-config": "^5.4.1",
         "@eslint-react/eslint-plugin": "^2.1.1",
-        "@iconify/json": "^2.2.393",
+        "@iconify/json": "^2.2.395",
         "@iconify/tailwind": "^1.2.0",
         "@iconify/tools": "^4.1.4",
         "@rsbuild/core": "^1.5.17",
@@ -233,7 +233,7 @@
 
     "@humanwhocodes/retry": ["@humanwhocodes/retry@0.4.3", "https://registry.npmmirror.com/@humanwhocodes/retry/-/retry-0.4.3.tgz", {}, "sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ=="],
 
-    "@iconify/json": ["@iconify/json@2.2.393", "", { "dependencies": { "@iconify/types": "*", "pathe": "^2.0.0" } }, "sha512-Bpf0JrndzclsNHp4TPFm8OBjUotAAxE6S6e0Af1Riu5WroiO0cbvRr2UYAqIy58YhFUJNMxgFQV3A+GHexYf6g=="],
+    "@iconify/json": ["@iconify/json@2.2.395", "", { "dependencies": { "@iconify/types": "*", "pathe": "^2.0.0" } }, "sha512-XSYOnlGqiZhJkFFBUiVK4C5VIiv4rxyKtCmkQ9nS4zfMpS4xT0BF9+qWUKOHYgeCzCLghyWfrm6Eti3Sv5kfqQ=="],
 
     "@iconify/tailwind": ["@iconify/tailwind@1.2.0", "https://registry.npmmirror.com/@iconify/tailwind/-/tailwind-1.2.0.tgz", { "dependencies": { "@iconify/types": "^2.0.0" } }, "sha512-KgpIHWOTcRYw1XcoUqyNSrmYyfLLqZYu3AmP8zdfLk0F5TqRO8YerhlvlQmGfn7rJXgPeZN569xPAJnJ53zZxA=="],
 
