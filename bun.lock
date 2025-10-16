@@ -42,7 +42,7 @@
         "@types/react-dom": "^19.2.1",
         "eslint": "^9.37.0",
         "eslint-plugin-react-hooks": "7.0.0",
-        "eslint-plugin-react-refresh": "^0.4.23",
+        "eslint-plugin-react-refresh": "^0.4.24",
         "eslint-plugin-unused-imports": "^4.2.0",
         "tailwindcss": "^4.1.14",
         "taze": "^19.7.0",
@@ -783,7 +783,7 @@
 
     "eslint-plugin-react-naming-convention": ["eslint-plugin-react-naming-convention@2.1.1", "", { "dependencies": { "@eslint-react/ast": "2.1.1", "@eslint-react/core": "2.1.1", "@eslint-react/eff": "2.1.1", "@eslint-react/kit": "2.1.1", "@eslint-react/shared": "2.1.1", "@eslint-react/var": "2.1.1", "@typescript-eslint/scope-manager": "^8.46.0", "@typescript-eslint/type-utils": "^8.46.0", "@typescript-eslint/types": "^8.46.0", "@typescript-eslint/utils": "^8.46.0", "string-ts": "^2.2.1", "ts-pattern": "^5.8.0" }, "peerDependencies": { "eslint": "^9.37.0", "typescript": "^5.9.3" } }, "sha512-LqSAi5GlyfxK78boati1eACXUuyip2vQxdZZBCwhjoJQ1x32QmAEfiF+yrURNhUpnzHg+bFcMiXOipMYjz0pVg=="],
 
-    "eslint-plugin-react-refresh": ["eslint-plugin-react-refresh@0.4.23", "", { "peerDependencies": { "eslint": ">=8.40" } }, "sha512-G4j+rv0NmbIR45kni5xJOrYvCtyD3/7LjpVH8MPPcudXDcNu8gv+4ATTDXTtbRR8rTCM5HxECvCSsRmxKnWDsA=="],
+    "eslint-plugin-react-refresh": ["eslint-plugin-react-refresh@0.4.24", "", { "peerDependencies": { "eslint": ">=8.40" } }, "sha512-nLHIW7TEq3aLrEYWpVaJ1dRgFR+wLDPN8e8FpYAql/bMV2oBEfC37K0gLEGgv9fy66juNShSMV8OkTqzltcG/w=="],
 
     "eslint-plugin-react-web-api": ["eslint-plugin-react-web-api@2.1.1", "", { "dependencies": { "@eslint-react/ast": "2.1.1", "@eslint-react/core": "2.1.1", "@eslint-react/eff": "2.1.1", "@eslint-react/kit": "2.1.1", "@eslint-react/shared": "2.1.1", "@eslint-react/var": "2.1.1", "@typescript-eslint/scope-manager": "^8.46.0", "@typescript-eslint/types": "^8.46.0", "@typescript-eslint/utils": "^8.46.0", "string-ts": "^2.2.1", "ts-pattern": "^5.8.0" }, "peerDependencies": { "eslint": "^9.37.0", "typescript": "^5.9.3" } }, "sha512-MuI135gaveWbFHC31oVXfYh3+sKA5uuINAzgviUPz6CBKILyHg9ucIiFznZMc8a7hPmhvymi3JgrBi0B1OnKWQ=="],
 
