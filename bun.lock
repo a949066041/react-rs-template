@@ -9,7 +9,7 @@
         "@tanstack/react-query": "^5.90.5",
         "@tanstack/react-router": "^1.133.13",
         "@tanstack/react-table": "^8.21.3",
-        "classix": "^2.2.4",
+        "classix": "^2.2.5",
         "dayjs": "^1.11.18",
         "esno": "^4.8.0",
         "i18next": "^25.5.3",
@@ -629,7 +629,7 @@
 
     "ci-info": ["ci-info@4.3.0", "https://registry.npmmirror.com/ci-info/-/ci-info-4.3.0.tgz", {}, "sha512-l+2bNRMiQgcfILUi33labAZYIWlH1kWDp+ecNo5iisRKrbm0xcRyCww71/YU0Fkw0mAFpz9bJayXPjey6vkmaQ=="],
 
-    "classix": ["classix@2.2.4", "https://registry.npmmirror.com/classix/-/classix-2.2.4.tgz", {}, "sha512-65KooDcEetBS3qNCOIO1H4ULIYENfT81YFfubbvYDbN/jq0THDPTwB6sk0JMneWIG3a8MfX2834MbkS3irnY+A=="],
+    "classix": ["classix@2.2.5", "", {}, "sha512-HMrslcmIfjjvdRT0NLE/RpYzjXGcIPGbI4u1t9oyPKWkR5ki8REKfKZEyFmAz+H2ZYoCN9jbecyOGRQ49jda4A=="],
 
     "clean-regexp": ["clean-regexp@1.0.0", "https://registry.npmmirror.com/clean-regexp/-/clean-regexp-1.0.0.tgz", { "dependencies": { "escape-string-regexp": "^1.0.5" } }, "sha512-GfisEZEJvzKrmGWkvfhgzcz/BllN1USeqD2V6tg14OAOgaCD2Z/PUEuxnAZ/nPvmaHRG7a8y77p1T/IRQ4D1Hw=="],
 
