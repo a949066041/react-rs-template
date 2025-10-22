@@ -17,7 +17,7 @@
     "@tanstack/react-query": "^5.90.5",
     "@tanstack/react-router": "^1.133.13",
     "@tanstack/react-table": "^8.21.3",
-    "classix": "^2.2.4",
+    "classix": "^2.2.5",
     "dayjs": "^1.11.18",
     "esno": "^4.8.0",
     "i18next": "^25.5.3",
