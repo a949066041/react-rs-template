@@ -73,8 +73,8 @@ importers:
         specifier: ^2.2.3
         version: 2.2.3(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3)
       '@iconify/json':
-        specifier: ^2.2.400
-        version: 2.2.400
+        specifier: ^2.2.401
+        version: 2.2.401
       '@iconify/tailwind':
         specifier: ^1.2.0
         version: 1.2.0
@@ -639,8 +639,8 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
-  '@iconify/json@2.2.400':
-    resolution: {integrity: sha512-L8cy1YE/H0LFO4Pu7hfyylkrQmawL8sTOCH2PcBDydWA1FpoKijeIzweRJ6e9grvn2li9Yu+Pe32Jq9x4MKpaw==}
+  '@iconify/json@2.2.401':
+    resolution: {integrity: sha512-pBz8s09X2Aac6EhpfH1eWcu0Wqwuhgh3gmcoFgkrr6qUR1V2qZyz/TKo2hwGEEyyWqH2kc9t50qHRb0hxoG1/g==}
 
   '@iconify/tailwind@1.2.0':
     resolution: {integrity: sha512-KgpIHWOTcRYw1XcoUqyNSrmYyfLLqZYu3AmP8zdfLk0F5TqRO8YerhlvlQmGfn7rJXgPeZN569xPAJnJ53zZxA==}
@@ -866,12 +866,14 @@ packages:
 
   '@rsdoctor/core@1.3.4':
     resolution: {integrity: sha512-pfqcpPi+nqjiuhXDm5Z6FcE9oIu2IYPM8OhdYzScEPoLrilVVTMlU82IKJV8sP8d7wp/U4fcy2Ou9uV4A8PmPA==}
+    deprecated: Some dependencies are missing in this version, please use 1.3.5 or higher version
 
   '@rsdoctor/graph@1.3.4':
     resolution: {integrity: sha512-3OPCQBQwBFp3S03E4RVJZsO4De1pDeqEA5PqUTY0GqmciD0/hrNWwq6zZ/A9daRZWhgOjirxI9sbUKl38tgXuQ==}
 
   '@rsdoctor/rspack-plugin@1.3.4':
     resolution: {integrity: sha512-Hq937IrVxOsJy6i0g1/m48NpYN4F0qs/WCk82zkYnmhfCkSTP1g5RIqEBqgtbQRPReLaLlg240BzANyGco7QTA==}
+    deprecated: Some dependencies are missing in this version, please use 1.3.5 or higher version
     peerDependencies:
       '@rspack/core': '*'
     peerDependenciesMeta:
@@ -3986,7 +3988,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@iconify/json@2.2.400':
+  '@iconify/json@2.2.401':
     dependencies:
       '@iconify/types': 2.0.0
       pathe: 2.0.3
