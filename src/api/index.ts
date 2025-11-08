@@ -1,3 +1,2 @@
-export { fetchClient } from './fetch'
-
 export * from './module'
+export * from './fetch'

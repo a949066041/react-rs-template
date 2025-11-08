@@ -11,7 +11,7 @@ export interface IAppConfig {
   appVersion: string
 }
 
-export default {
+export const appConfig: IAppConfig = {
   routers: [
     { path: '/', title: '首页', icon: 'icon-[line-md--home]' },
     { path: '/table', title: 'react table', icon: 'icon-[hugeicons--table]' },
@@ -26,4 +26,4 @@ export default {
   ],
   apptitle: APP_TITLE,
   appVersion: `v${APP_VERSION}`,
-} as IAppConfig
+}

@@ -8,7 +8,7 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/router-devtools'
 import classix from 'classix'
 import { userMeQueryOptions } from '~/api'
 import { ThemeProvider, Themes, useTheme } from '~/components'
-import appConfig from '~/utils/app.config'
+import { appConfig } from '~/utils'
 
 function ThemeMode() {
   const { themeName, set } = useTheme()
