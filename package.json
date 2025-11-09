@@ -4,9 +4,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "rsbuild dev",
+    "dev": "rsbuild dev --env-dir env",
     "postinstall": "esno scripts/svg2json.ts",
-    "build": "rsbuild build",
+    "build:test": "rsbuild build --env-dir env --env-mode test",
+    "build": "rsbuild build --env-dir env",
     "preview": "rsbuild preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"

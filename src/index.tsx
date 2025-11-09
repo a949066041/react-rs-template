@@ -14,6 +14,12 @@ if (typeof window !== 'undefined') {
   })
 }
 
+if (import.meta.env.PUBLIC_CONSOLE === '1') {
+  // @ts-expect-error error VConsole is not a constructor
+  // eslint-disable-next-line no-new
+  new VConsole()
+}
+
 function bootstrap() {
   const rootEl = document.getElementById('root')
   if (rootEl) {

@@ -9,6 +9,7 @@ export interface IAppConfig {
   routers: IAppRouteItem[]
   apptitle: string
   appVersion: string
+  isDev: boolean
 }
 
 export const appConfig: IAppConfig = {
@@ -26,4 +27,5 @@ export const appConfig: IAppConfig = {
   ],
   apptitle: APP_TITLE,
   appVersion: `v${APP_VERSION}`,
+  isDev: import.meta.env.PUBLIC_CONSOLE === '1',
 }
